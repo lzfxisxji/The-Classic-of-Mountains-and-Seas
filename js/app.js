@@ -229,7 +229,7 @@ filterChips.forEach((chip) => {
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+  }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
   items.forEach((el) => io.observe(el));
 })();
 
