@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 440" role="img" aria-label="毕方 原创档案原画">
+  <defs>
+    <pattern id="grid-bf" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0 H0 V34" fill="none" stroke="rgba(237,189,121,0.06)" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow-bf" cx="50%" cy="40%" r="62%">
+      <stop offset="0%" stop-color="#c8531f" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#c8531f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="340" height="440" fill="#0b0809"/>
+  <rect width="340" height="440" fill="url(#grid-bf)"/>
+  <rect width="340" height="440" fill="url(#glow-bf)"/>
+
+  <!-- 切角金框 -->
+  <path d="M28 14 H312 L326 28 V412 L312 426 H28 L14 412 V28 Z"
+        fill="none" stroke="#edbd79" stroke-width="2" stroke-opacity="0.85"/>
+
+  <!-- 毕方 · 火兆一足鸟 -->
+  <g fill="none" stroke="#edbd79" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 身体 -->
+    <path d="M150 250 C140 232 150 214 174 210 C198 206 214 220 214 240
+             C214 262 198 278 174 278 C158 278 152 266 150 250 Z"/>
+    <!-- 长颈上扬 -->
+    <path d="M196 218 C204 196 196 170 210 150 C218 138 214 124 226 120"/>
+    <!-- 头 -->
+    <path d="M222 110 C232 104 244 108 246 118 C248 128 240 134 230 132
+             C222 130 218 120 222 110 Z"/>
+    <!-- 白喙 -->
+    <path d="M246 117 L266 110 L246 123" stroke="#f3e8cf" stroke-width="2.4"/>
+    <!-- 一眼 -->
+    <circle cx="234" cy="118" r="2.4" fill="#edbd79" stroke="none"/>
+    <!-- 收拢的翅 -->
+    <path d="M150 244 C128 240 112 252 110 272 C126 270 140 266 152 258"/>
+    <path d="M152 258 C166 262 182 262 196 256"/>
+    <!-- 尾羽飘散 -->
+    <path d="M214 262 C236 268 252 262 266 248"/>
+    <path d="M214 270 C238 282 256 280 272 268"/>
+    <path d="M210 276 C232 294 250 296 268 288"/>
+    <!-- 独足 -->
+    <path d="M176 278 L176 330 L166 344 M176 330 L188 344"/>
+  </g>
+
+  <!-- 火纹点缀 -->
+  <g fill="none" stroke="#c8531f" stroke-width="2" stroke-linecap="round" opacity="0.9">
+    <path d="M96 332 C104 318 98 306 110 300 C104 308 110 318 102 326"/>
+    <path d="M250 340 C258 326 252 314 264 308 C258 316 264 326 256 334"/>
+    <path d="M150 360 C158 348 152 338 162 334 C158 340 162 348 156 354"/>
+  </g>
+
+  <!-- 标题印章 -->
+  <text x="170" y="404" text-anchor="middle" fill="#edbd79"
+        font-family="'Noto Serif SC', serif" font-size="20" letter-spacing="6">毕 方</text>
+  <text x="170" y="420" text-anchor="middle" fill="rgba(237,189,121,0.55)"
+        font-family="'DM Mono', monospace" font-size="8" letter-spacing="2">BI-FANG · 火兆</text>
+</svg>

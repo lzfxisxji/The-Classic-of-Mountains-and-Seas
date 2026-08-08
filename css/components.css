@@ -143,6 +143,8 @@
   height: 72px;
   color: rgba(151, 181, 203, .22);
 }
+.bifang-art { color: rgba(200, 83, 31, .30); }
+.fuzhu-art { color: rgba(63, 138, 120, .34); }
 
 /* ---------- 右侧异兽研究档案抽屉 ---------- */
 .record-dialog {
