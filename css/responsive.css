@@ -55,6 +55,9 @@
 
   /* 山经体系：平板下罗盘与卡片堆叠为单列 */
   .canon-body { grid-template-columns: 1fr; gap: 40px; }
+
+  /* 神话叙事：平板下卷体双栏收为单列 */
+  .myth-scroll__body { grid-template-columns: 1fr; gap: 20px; }
 }
 
 /* =========================================================
@@ -207,6 +210,16 @@
   .legacy { padding: 64px 20px; }
   .legacy-grid { grid-template-columns: 1fr; }
   .legacy-axis { grid-template-columns: repeat(2, 1fr); }
+
+  /* 神话叙事（移动端） */
+  .myth { padding: 64px 20px; }
+  .myth-scroll { padding: 26px 22px 24px; }
+  .myth-scroll__head { gap: 10px; }
+  .myth-scroll__source { margin-left: 0; flex-basis: 100%; }
+  .myth-scroll__body { grid-template-columns: 1fr; gap: 18px; }
+  .myth-scroll__foot { gap: 12px; }
+  .myth-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .myth-link { margin-left: 0; }
 }
 
 /* =========================================================

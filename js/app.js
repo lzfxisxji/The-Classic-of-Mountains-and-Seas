@@ -251,3 +251,15 @@ filterChips.forEach((chip) => {
     });
   });
 })();
+
+/* ---------- 神话叙事：关联档案按钮联动抽屉 ---------- */
+(function initMythLinks() {
+  const links = [...document.querySelectorAll('[data-open-beast]')];
+  if (!links.length) return;
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      const id = link.dataset.openBeast;
+      if (id && beasts[id]) openRecord(id);
+    });
+  });
+})();
