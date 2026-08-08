@@ -1293,10 +1293,27 @@ footer {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1);
+  transition-delay: var(--reveal-delay, 0s);
 }
 [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
+}
+
+/* ---- 滚动叙事增强：分层显影 stagger + 卷轴展开入场 ---- */
+/* 章节标题内：副标 → 主标 → 导语 依次显影，形成阅读节奏 */
+.canon-head > [data-reveal]:nth-child(1),
+.myth-head > [data-reveal]:nth-child(1) { --reveal-delay: 0s; }
+.canon-head > [data-reveal]:nth-child(2),
+.myth-head > [data-reveal]:nth-child(2) { --reveal-delay: .12s; }
+.canon-head > [data-reveal]:nth-child(3),
+.myth-head > [data-reveal]:nth-child(3) { --reveal-delay: .24s; }
+
+/* 卷轴：卷入(scaleY .6) → 展平；三卷轴依次展开（hover 上浮不受影响） */
+.myth-scroll[data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: scaleY(.6) translateY(22px);
+  transform-origin: top center;
 }
 
 /* =========================================================
@@ -1343,7 +1360,14 @@ footer {
 
 /* 五方四海罗盘（原创装饰图形） */
 .canon-compass { display: flex; justify-content: center; }
-.compass-svg { width: min(100%, 380px); height: auto; }
+.compass-svg {
+  width: min(100%, 380px);
+  height: auto;
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  transform: rotate(calc(var(--p, 0) * 140deg));
+  will-change: transform;
+}
 .compass-ring { fill: none; stroke: rgba(237, 189, 121, .5); stroke-width: 1.2; }
 .compass-ring .compass-dash { stroke: rgba(237, 189, 121, .28); stroke-dasharray: 2 8; }
 .compass-sea { fill: none; stroke: rgba(193, 139, 91, .42); stroke-width: 1.6; stroke-dasharray: 1 11; }

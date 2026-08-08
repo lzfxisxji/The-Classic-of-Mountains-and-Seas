@@ -388,11 +388,19 @@ filterChips.forEach((chip) => {
 /* ---------- 全局氛围层：滚动视差（rAF 节流，reduced-motion 兜底） ---------- */
 (function initParallax() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return; // 关闭视差，避免前庭敏感用户不适
+  if (reduce) return; // 关闭视差与滚动驱动，避免前庭敏感用户不适
   const root = document.documentElement;
+  const scrollEls = [...document.querySelectorAll('[data-scroll]')];
   let ticking = false;
+  function progress(el) {
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const p = (vh - r.top) / (vh + r.height);
+    return Math.max(0, Math.min(1, p)).toFixed(4);
+  }
   function update() {
     root.style.setProperty('--scroll-y', (window.scrollY || window.pageYOffset || 0) + 'px');
+    for (const el of scrollEls) el.style.setProperty('--p', progress(el));
     ticking = false;
   }
   function onScroll() {
