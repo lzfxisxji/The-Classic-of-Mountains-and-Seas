@@ -29,9 +29,21 @@ function updateFieldValues(beast) {
 function changeSpecimenImage(beast) {
   image.classList.add('is-leaving');
   window.setTimeout(() => {
-    image.src = beast.image;
-    image.alt = `${beast.name}原创异兽档案图`;
-    image.decode?.().catch(() => {}).finally(() => image.classList.remove('is-leaving'));
+    image.poster = beast.image;
+    image.setAttribute('aria-label', `${beast.name}原创异兽档案图`);
+    if (beast.webm) {
+      if (image.dataset.src !== beast.webm) {
+        image.src = beast.webm;
+        image.dataset.src = beast.webm;
+      }
+      const p = image.play && image.play();
+      if (p && p.catch) p.catch(() => {});
+    } else if (image.dataset.src) {
+      image.removeAttribute('src');
+      if (image.load) image.load();
+      delete image.dataset.src;
+    }
+    window.setTimeout(() => image.classList.remove('is-leaving'), 60);
   }, 180);
 }
 

@@ -1,0 +1,3 @@
+# 非山海站内容：Remotion 视频工程目录（含 node_modules），不纳入站点仓库
+pv-remotion/
+node_modules/
