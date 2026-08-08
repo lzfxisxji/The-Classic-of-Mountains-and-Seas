@@ -384,3 +384,23 @@ filterChips.forEach((chip) => {
   }
   field.appendChild(frag);
 })();
+
+/* ---------- 全局氛围层：滚动视差（rAF 节流，reduced-motion 兜底） ---------- */
+(function initParallax() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // 关闭视差，避免前庭敏感用户不适
+  const root = document.documentElement;
+  let ticking = false;
+  function update() {
+    root.style.setProperty('--scroll-y', (window.scrollY || window.pageYOffset || 0) + 'px');
+    ticking = false;
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+})();
