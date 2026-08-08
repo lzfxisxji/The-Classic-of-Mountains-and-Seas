@@ -216,10 +216,14 @@
   .myth-scroll { padding: 26px 22px 24px; }
   .myth-scroll__head { gap: 10px; }
   .myth-scroll__source { margin-left: 0; flex-basis: 100%; }
-  .myth-scroll__body { grid-template-columns: 1fr; gap: 18px; }
-  .myth-scroll__foot { gap: 12px; }
-  .myth-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
-  .myth-link { margin-left: 0; }
+  .myth-scroll__lede { font-size: 14px; }
+  .myth-chapter { gap: 12px; margin-bottom: 34px; }
+  .myth-chapter__label { font-size: 9px; letter-spacing: .16em; }
+  .myth-dialog { width: 94vw; height: 90vh; }
+  .myth-dialog__inner { padding: 40px 22px 34px; }
+  .myth-dialog__close { top: 12px; right: 12px; width: 38px; height: 38px; font-size: 26px; }
+  .myth-dialog__foot { gap: 12px; }
+  .myth-dialog__link { margin-left: 0; }
 }
 
 /* =========================================================

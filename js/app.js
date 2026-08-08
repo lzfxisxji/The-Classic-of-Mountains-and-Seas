@@ -252,14 +252,97 @@ filterChips.forEach((chip) => {
   });
 })();
 
-/* ---------- 神话叙事：关联档案按钮联动抽屉 ---------- */
+/* ---------- 神话叙事：关联档案按钮联动抽屉（先关神话层） ---------- */
 (function initMythLinks() {
   const links = [...document.querySelectorAll('[data-open-beast]')];
   if (!links.length) return;
+  const mythDialog = document.getElementById('myth-dialog');
   links.forEach((link) => {
     link.addEventListener('click', () => {
       const id = link.dataset.openBeast;
-      if (id && beasts[id]) openRecord(id);
+      if (id && beasts[id]) {
+        if (mythDialog && mythDialog.open) mythDialog.close();
+        openRecord(id);
+      }
     });
   });
+})();
+
+/* ---------- 神话叙事：沉浸阅读层（主页入口 → 全屏阅读） ---------- */
+(function initMythDialog() {
+  const mythDialog = document.getElementById('myth-dialog');
+  if (!mythDialog) return;
+  const triggers = [...document.querySelectorAll('[data-myth]')];
+  if (!triggers.length) return;
+
+  const myths = {
+    jingwei: {
+      no: 'MYTH · 01',
+      name: '精卫填海',
+      source: '北山经 · 发鸠之山 → 东海',
+      accent: '#d8523f',
+      original: '有鸟焉，其状如乌，文首、白喙、赤足，名曰「精卫」，其鸣自詨。是炎帝之少女，名曰女娃。女娃游于东海，溺而不返，故为精卫，常衔西山之木石，以堙于东海。',
+      prose: '炎帝的小女儿女娃，溺于东海，魂化此鸟。她不复为人，却不肯止息，日复一日衔来西山木石，投向吞噬过自己的沧海。形体微小，意志却以无尽的重复对抗浩瀚——这便是“精卫填海”：一种把哀伤炼成行动、把不可能当作日常的韧性。本站档案中，她仍以赤霞之羽巡行于发鸠与东海之间。',
+      tags: ['执念', '重生', '东海', '赤霞'],
+      beast: 'jingwei'
+    },
+    kuafu: {
+      no: 'MYTH · 02',
+      name: '夸父逐日',
+      source: '海外北经 · 大荒北经',
+      accent: '#eba15a',
+      original: '夸父与日逐走，入日；渴，欲得饮，饮于河、渭；河、渭不足，北饮大泽。未至，道渴而死。弃其杖，化为邓林。',
+      prose: '巨人夸父与太阳赛跑，追至日影深处，焦渴难耐，饮尽黄河、渭水仍不足，又向北奔向大泽，终因力竭倒于途中。他遗下的手杖，化作千里桃林——邓林。故事写尽了人对光明的向往，也写尽了人力在自然伟力前的壮烈与限度：败亡之中，仍有生生不息的余响。',
+      tags: ['逐日', '邓林', '大泽', '壮烈'],
+      beast: null
+    },
+    xingtian: {
+      no: 'MYTH · 03',
+      name: '刑天舞干戚',
+      source: '海外西经 · 大荒西经',
+      accent: '#8fb6c0',
+      original: '刑天与帝至此争神，帝断其首，葬之常羊之山。乃以乳为目，以脐为口，操干戚以舞。',
+      prose: '刑天与天帝争夺神位，被斩去头颅，葬于常羊之山。失了头颅，他并未倒下——以双乳为眼，以肚脐为口，握盾持斧，继续起舞。一个失去面容却不肯停下的舞者，遂成反抗与不屈的图腾。陶渊明读之慨然：“刑天舞干戚，猛志固常在。”',
+      tags: ['争神', '干戚', '常羊山', '不屈'],
+      beast: null
+    }
+  };
+
+  const el = {
+    no: mythDialog.querySelector('.myth-dialog__no'),
+    name: mythDialog.querySelector('.myth-dialog__name'),
+    source: mythDialog.querySelector('.myth-dialog__source'),
+    original: mythDialog.querySelector('.myth-dialog__original p'),
+    prose: mythDialog.querySelector('.myth-dialog__prose'),
+    tags: mythDialog.querySelector('.myth-dialog__tags'),
+    link: mythDialog.querySelector('.myth-dialog__link'),
+    locked: mythDialog.querySelector('.myth-dialog__locked')
+  };
+
+  function openMyth(key) {
+    const m = myths[key];
+    if (!m) return;
+    mythDialog.style.setProperty('--myth-accent-strong', m.accent);
+    el.no.textContent = m.no;
+    el.name.textContent = m.name;
+    el.source.textContent = m.source;
+    el.original.textContent = m.original;
+    el.prose.textContent = m.prose;
+    el.tags.innerHTML = m.tags.map((t) => `<span class="myth-tag">${t}</span>`).join('');
+    if (m.beast) {
+      el.link.style.display = '';
+      el.link.dataset.openBeast = m.beast;
+      el.locked.style.display = 'none';
+    } else {
+      el.link.style.display = 'none';
+      el.locked.style.display = '';
+    }
+    if (!mythDialog.open) mythDialog.showModal();
+  }
+
+  triggers.forEach((btn) => btn.addEventListener('click', () => openMyth(btn.dataset.myth)));
+
+  const closeBtn = document.getElementById('close-myth');
+  if (closeBtn) closeBtn.addEventListener('click', () => mythDialog.close());
+  mythDialog.addEventListener('click', (event) => { if (event.target === mythDialog) mythDialog.close(); });
 })();

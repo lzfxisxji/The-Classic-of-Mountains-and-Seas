@@ -1438,9 +1438,10 @@ a.canon-card:focus-visible { box-shadow: 0 0 0 2px rgba(237, 189, 121, .5); }
   z-index: 5;
   padding: 96px clamp(24px, 5vw, 84px);
   background:
-    radial-gradient(circle at 50% 0%, rgba(185, 38, 32, .12), transparent 42%),
-    linear-gradient(180deg, #0c0809, #140c0e);
-  border-top: 1px solid var(--line);
+    radial-gradient(circle at 50% -8%, rgba(185, 38, 32, .24), transparent 48%),
+    linear-gradient(180deg, #0c0809 0%, #170d0f 50%, #0c0809 100%);
+  border-top: 1px solid rgba(237, 189, 121, .3);
+  border-bottom: 1px solid rgba(237, 189, 121, .16);
 }
 .myth-inner { max-width: 1180px; margin: 0 auto; }
 .myth-head { max-width: 800px; margin-bottom: 54px; }
@@ -1449,19 +1450,63 @@ a.canon-card:focus-visible { box-shadow: 0 0 0 2px rgba(237, 189, 121, .5); }
 .myth-title em { color: var(--gold); font-style: normal; }
 .myth-lead { margin: 0; max-width: 720px; color: #cdbaa4; font-size: 15px; line-height: 2; }
 
+/* 章节分隔：卷柒印章 + 双线，强化“进入新章节”的仪式感 */
+.myth-chapter {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 520px;
+  margin: 0 auto 44px;
+}
+.myth-chapter__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(237, 189, 121, .55), transparent);
+}
+.myth-chapter__seal {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  color: var(--gold);
+  font-size: 26px;
+  font-weight: 700;
+  background: rgba(185, 38, 32, .16);
+  box-shadow: inset 0 0 0 3px rgba(13, 8, 9, .65);
+}
+.myth-chapter__label {
+  color: #b9a78f;
+  font: 10px "DM Mono", monospace;
+  letter-spacing: .2em;
+}
+
 .myth-list { display: grid; gap: 22px; }
 
-/* 单卷轴：墨底金线 + 切角，三故事各一强调色 */
+/* 单卷轴：墨底金线 + 切角，三故事各一强调色；作为“展卷入囗”按钮 */
 .myth-scroll {
   --myth-accent: rgba(237, 189, 121, .2);
   --myth-accent-strong: var(--gold);
   position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
   padding: 32px clamp(24px, 3vw, 40px) 28px;
   border: 1px solid var(--myth-accent);
   background: linear-gradient(160deg, rgba(45, 22, 20, .38), rgba(16, 10, 11, .92));
   clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
   transition: border-color .28s, transform .28s, box-shadow .28s;
 }
+.myth-scroll:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 .myth-scroll::before {
   content: "";
   position: absolute;
@@ -1510,6 +1555,26 @@ a.canon-card:focus-visible { box-shadow: 0 0 0 2px rgba(237, 189, 121, .5); }
   font: 10px "DM Mono", monospace;
   letter-spacing: .12em;
 }
+
+/* 卷轴入口：导语 + 展卷入囗提示（长文已移入沉浸阅读层） */
+.myth-scroll__lede {
+  margin: 0 0 20px;
+  max-width: 62ch;
+  color: #c9b6a0;
+  font-size: 14.5px;
+  line-height: 2;
+}
+.myth-scroll__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--myth-accent-strong);
+  font: 13px "Noto Serif SC", serif;
+  letter-spacing: .04em;
+  transition: gap .2s, color .2s;
+}
+.myth-scroll:hover .myth-scroll__open,
+.myth-scroll:focus-visible .myth-scroll__open { gap: 14px; }
 
 /* 卷体：古籍原文（左）/ 现代释义（右） */
 .myth-scroll__body {
@@ -1589,4 +1654,133 @@ a.canon-card:focus-visible { box-shadow: 0 0 0 2px rgba(237, 189, 121, .5); }
   font-size: 12px;
 }
 .myth-link--locked span { display: none; }
+
+/* 沉浸阅读层：全屏居中阅读面板（仿异兽抽屉，主页只留入口） */
+.myth-dialog {
+  --myth-accent: rgba(237, 189, 121, .2);
+  --myth-accent-strong: var(--gold);
+  position: fixed;
+  inset: 0;
+  width: min(720px, 92vw);
+  max-width: none;
+  height: min(86vh, 780px);
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(237, 189, 121, .42);
+  background:
+    radial-gradient(circle at 88% 0%, rgba(185, 38, 32, .2), transparent 38%),
+    linear-gradient(165deg, #1b1012 0%, #0f0a0b 50%, #160b0d 100%);
+  color: var(--paper);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .7);
+}
+.myth-dialog[open] { animation: myth-dialog-enter 360ms cubic-bezier(.22, .78, .18, 1) both; }
+.myth-dialog::backdrop {
+  background: linear-gradient(180deg, rgba(4, 3, 3, .55), rgba(4, 3, 3, .88));
+  backdrop-filter: blur(4px);
+}
+.myth-dialog[open]::backdrop { animation: myth-backdrop-enter 360ms ease-out both; }
+@keyframes myth-dialog-enter {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes myth-backdrop-enter { from { opacity: 0; } to { opacity: 1; } }
+
+.myth-dialog__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  padding: 0 0 4px;
+  border: 1px solid rgba(237, 189, 121, .42);
+  background: rgba(237, 189, 121, .04);
+  color: var(--paper);
+  font: 300 29px/1 "DM Mono", monospace;
+  cursor: pointer;
+  transition: border-color .25s, background .25s, color .25s, transform .25s;
+}
+.myth-dialog__close:hover { border-color: var(--gold); background: var(--gold); color: #160b0d; transform: rotate(90deg); }
+.myth-dialog__close:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.myth-dialog__inner {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: rgba(237, 189, 121, .42) transparent;
+  scrollbar-width: thin;
+  padding: 46px clamp(26px, 4vw, 56px) 40px;
+  border-top: 3px solid var(--myth-accent-strong);
+}
+.myth-dialog__head { margin-bottom: 30px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.myth-dialog__no {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--myth-accent-strong);
+  font: 500 12px "DM Mono", monospace;
+  letter-spacing: .16em;
+}
+.myth-dialog__name {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(30px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+.myth-dialog__source {
+  display: block;
+  margin-top: 10px;
+  color: #9a8775;
+  font: 10px "DM Mono", monospace;
+  letter-spacing: .14em;
+}
+.myth-dialog__body { display: grid; gap: 26px; }
+.myth-dialog__original { margin: 0; padding: 4px 0 4px 18px; border-left: 2px solid var(--myth-accent-strong); }
+.myth-dialog__original p { margin: 0; color: #e2c8b4; font-size: 15px; line-height: 2.1; letter-spacing: .02em; }
+.myth-dialog__original footer { margin-top: 12px; color: #8a7868; font: 9px "DM Mono", monospace; letter-spacing: .14em; }
+.myth-dialog__prose { margin: 0; color: #c9b6a0; font-size: 15px; line-height: 2.15; }
+.myth-dialog__foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.myth-dialog__tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.myth-dialog__tags .myth-tag {
+  padding: 4px 10px;
+  border: 1px solid var(--myth-accent);
+  color: var(--myth-accent-strong);
+  font: 10px "DM Mono", monospace;
+  letter-spacing: .1em;
+}
+.myth-dialog__link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--myth-accent-strong);
+  background: transparent;
+  color: var(--paper);
+  font: 13px "Noto Serif SC", serif;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: color .2s, gap .2s;
+}
+.myth-dialog__link span { color: var(--myth-accent-strong); }
+.myth-dialog__link:hover { gap: 12px; color: var(--myth-accent-strong); }
+.myth-dialog__link:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+.myth-dialog__locked {
+  margin-left: auto;
+  border-bottom: 1px dashed rgba(245, 232, 207, .3);
+  color: #8a7868;
+  font-size: 12px;
+  letter-spacing: .04em;
+}
 
