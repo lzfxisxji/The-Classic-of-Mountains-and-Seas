@@ -311,9 +311,65 @@ nav .active {
 }
 .specimen-art::before { border: 12px solid rgba(15, 9, 8, .33); box-shadow: inset 0 0 80px rgba(0, 0, 0, .42); }
 .specimen-art::after { background: linear-gradient(120deg, rgba(246, 210, 154, .12), transparent 22% 72%, rgba(0, 0, 0, .32)); mix-blend-mode: screen; }
-.specimen-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: contrast(1.06) saturate(1.04) brightness(.93); transform: scale(1.018); transition: opacity .36s ease, transform 1s cubic-bezier(.2,.8,.2,1), filter .7s ease; }
+.specimen-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: contrast(1.06) saturate(1.04) brightness(.93); transform: scale(1.018); transition: opacity .36s ease, transform 1s cubic-bezier(.2,.8,.2,1), filter .7s ease; position: relative; z-index: 1; animation: img-float 9s ease-in-out infinite; }
 .specimen-art img.is-leaving { opacity: 0; transform: scale(1.07); filter: blur(7px) brightness(.65); }
 .art-reflection { position: absolute; z-index: 3; inset: -15% -40%; background: linear-gradient(110deg, transparent 42%, rgba(255, 232, 188, .15) 49%, transparent 56%); transform: translateX(-55%) skewX(-12deg); animation: glass-sweep 9s 1.5s ease-in-out infinite; pointer-events: none; }
+
+/* 标本动态（方案A）：龙图悬浮呼吸 + 旋转金光衬底 + 火星粒子 */
+@keyframes img-float {
+  0%, 100% { translate: 0 0; scale: 1; }
+  50% { translate: 0 -12px; scale: 1.02; }
+}
+.specimen-aura {
+  position: absolute;
+  z-index: 0;
+  inset: -9%;
+  border-radius: 6px;
+  background: conic-gradient(from 0deg,
+    transparent 0 16%,
+    rgba(242, 205, 143, 0) 20%,
+    rgba(242, 205, 143, .55) 32%,
+    transparent 44% 68%,
+    rgba(var(--accent-rgb), 0) 72%,
+    rgba(var(--accent-rgb), .5) 84%,
+    transparent 96%);
+  filter: blur(24px);
+  mix-blend-mode: screen;
+  opacity: .55;
+  animation: aura-rotate 16s linear infinite;
+  pointer-events: none;
+}
+@keyframes aura-rotate { to { transform: rotate(360deg); } }
+.ember-field {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ember {
+  position: absolute;
+  bottom: -8%;
+  width: var(--s, 3px);
+  height: var(--s, 3px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 226, 170, .95), rgba(242, 205, 143, .35) 55%, transparent 72%);
+  box-shadow: 0 0 6px rgba(242, 205, 143, .6);
+  opacity: 0;
+  animation: ember-rise var(--d, 6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes ember-rise {
+  0% { transform: translateY(0) scale(.5); opacity: 0; }
+  14% { opacity: .9; }
+  78% { opacity: .45; }
+  100% { transform: translateY(-118%) scale(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .specimen-art img { animation: none; }
+  .specimen-aura { animation: none; opacity: .3; }
+  .ember-field { display: none; }
+}
 .beast-stage:hover .specimen-art { box-shadow: 0 34px 90px rgba(0, 0, 0, .5), 0 0 0 9px rgba(242, 205, 143, .055), 0 0 125px rgba(var(--accent-rgb), .42); }
 .beast-stage:hover .beast {
   filter: drop-shadow(0 30px 30px rgba(var(--accent-rgb), .4));

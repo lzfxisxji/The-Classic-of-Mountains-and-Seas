@@ -346,3 +346,29 @@ filterChips.forEach((chip) => {
   if (closeBtn) closeBtn.addEventListener('click', () => mythDialog.close());
   mythDialog.addEventListener('click', (event) => { if (event.target === mythDialog) mythDialog.close(); });
 })();
+
+/* ---------- Hero 标本：火星粒子（JS 注入，按屏宽决定数量） ---------- */
+(function initEmbers() {
+  const stage = document.querySelector('.beast-stage');
+  if (!stage) return;
+  let field = stage.querySelector('.ember-field');
+  if (!field) {
+    field = document.createElement('div');
+    field.className = 'ember-field';
+    field.setAttribute('aria-hidden', 'true');
+    stage.appendChild(field);
+  }
+  const count = window.innerWidth < 780 ? 8 : 20;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < count; i++) {
+    const e = document.createElement('span');
+    e.className = 'ember';
+    const s = (Math.random() * 3 + 2).toFixed(1);
+    e.style.setProperty('--s', s + 'px');
+    e.style.left = (Math.random() * 100).toFixed(2) + '%';
+    e.style.setProperty('--d', (Math.random() * 4 + 4).toFixed(2) + 's');
+    e.style.animationDelay = (-Math.random() * 8).toFixed(2) + 's';
+    frag.appendChild(e);
+  }
+  field.appendChild(frag);
+})();
