@@ -1,0 +1,404 @@
+/* ============================================================
+   components.css — 可复用 UI 组件
+   按钮 / 卡片 / 对话框 / 印章标签。
+   这些是跨板块复用的"原子 / 分子"控件，布局区块见 sections.css。
+   ============================================================ */
+
+/* ---------- 环境音开关按钮 ---------- */
+.sound-toggle {
+  border: 1px solid rgba(245, 232, 207, .35);
+  background: rgba(10, 7, 8, .35);
+  color: var(--paper);
+  padding: 7px 10px;
+  font: 9px "DM Mono", monospace;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+.sound-toggle.active {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---------- 汉堡菜单按钮 ---------- */
+.menu {
+  display: grid;
+  gap: 6px;
+  width: 28px;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.menu span {
+  height: 1px;
+  background: var(--paper);
+  transition: transform .25s, width .25s;
+}
+.menu span:last-child {
+  width: 65%;
+  justify-self: end;
+}
+.menu.open span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.menu.open span:last-child { width: 100%; transform: translateY(-3.5px) rotate(-45deg); }
+
+/* ---------- 主操作按钮（展开档案） ---------- */
+.scan-button {
+  border: 0;
+  padding: 12px 18px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 13px "Noto Serif SC", serif;
+  cursor: pointer;
+  transition: transform .25s, background .25s;
+}
+.scan-button:hover {
+  transform: translateY(-3px);
+  background: var(--gold);
+}
+.play {
+  margin-right: 8px;
+  font: 700 16px "DM Mono", monospace;
+}
+
+/* ---------- 印章标签（甲级观测对象） ---------- */
+.seal {
+  display: inline-flex;
+  margin: 0 0 20px;
+  padding: 5px 10px;
+  color: var(--gold);
+  border: 1px solid rgba(239, 189, 119, .6);
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+
+/* ---------- 异兽档案卡片 ---------- */
+.record-card {
+  position: relative;
+  min-height: 151px;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid rgba(244, 232, 209, .13);
+  background: linear-gradient(132deg, #171013, #110b0c);
+  color: var(--paper);
+  text-align: left;
+  cursor: pointer;
+  transition: transform .35s, border-color .35s, background .35s;
+}
+.record-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(245, 232, 207, .07);
+  pointer-events: none;
+}
+.record-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(239, 189, 119, .56);
+}
+.record-card.active {
+  border-color: #e7795e;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--red) 88%, #120b0d), #2c0e12);
+}
+.card-no,
+.record-card small {
+  display: block;
+  color: #dab582;
+  font: 9px "DM Mono", monospace;
+  letter-spacing: .12em;
+}
+.record-card strong {
+  position: absolute;
+  bottom: 30px;
+  left: 16px;
+  font-size: 18px;
+}
+.record-card small {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  color: #d8c3ae;
+}
+/* 卡片右下角原创线描插画（鎏金水印） */
+.card-art {
+  position: absolute;
+  right: 10px;
+  bottom: 2px;
+  width: 86px;
+  height: 86px;
+  color: rgba(242, 211, 166, .18);
+  pointer-events: none;
+}
+.card-art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.yinglong-art { color: rgba(242, 211, 166, .18); }
+.baize-art { color: rgba(178, 215, 187, .22); }
+.jingwei-art { color: rgba(240, 137, 105, .22); }
+.kuiniu-art {
+  right: 14px;
+  bottom: 8px;
+  width: 72px;
+  height: 72px;
+  color: rgba(151, 181, 203, .22);
+}
+
+/* ---------- 右侧异兽研究档案抽屉 ---------- */
+.record-dialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(480px, 100vw);
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid rgba(237, 189, 121, .48);
+  background:
+    radial-gradient(circle at 86% 4%, rgba(185, 38, 32, .18), transparent 35%),
+    linear-gradient(165deg, #1b1012 0%, #0f0a0b 46%, #160b0d 100%);
+  color: var(--paper);
+  box-shadow: -30px 0 90px rgba(0, 0, 0, .7);
+  transform: translateX(100%);
+}
+.record-dialog[open] { animation: record-drawer-enter 380ms cubic-bezier(.22, .78, .18, 1) both; }
+.record-dialog::backdrop {
+  background: linear-gradient(90deg, rgba(4, 3, 3, .46), rgba(4, 3, 3, .84));
+  backdrop-filter: blur(3px);
+}
+.record-dialog[open]::backdrop { animation: record-backdrop-enter 380ms ease-out both; }
+
+@keyframes record-drawer-enter {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes record-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.record-drawer {
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: rgba(237, 189, 121, .42) transparent;
+  scrollbar-width: thin;
+}
+.record-drawer::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: 480px;
+  max-width: 100vw;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold) 32%, #f0d7ac 72%, transparent);
+  pointer-events: none;
+}
+.record-drawer-header {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px 34px 26px;
+  border-bottom: 1px solid rgba(237, 189, 121, .2);
+  background: linear-gradient(180deg, rgba(20, 11, 13, .98), rgba(20, 11, 13, .93));
+  backdrop-filter: blur(14px);
+}
+.record-kicker,
+.record-latin,
+.record-section-heading small,
+.record-showcase-index,
+.record-showcase figcaption,
+.record-stat output {
+  font-family: "DM Mono", monospace;
+  letter-spacing: .14em;
+}
+.record-kicker {
+  margin: 0 0 8px;
+  color: var(--gold);
+  font-size: 9px;
+}
+.record-drawer-header h2 {
+  margin: 0;
+  font-size: clamp(29px, 7vw, 38px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: .08em;
+}
+.record-latin {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+}
+.record-dialog .close-dialog {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0 0 4px;
+  border: 1px solid rgba(237, 189, 121, .42);
+  background: rgba(237, 189, 121, .04);
+  color: var(--paper);
+  font: 300 29px/1 "DM Mono", monospace;
+  cursor: pointer;
+  transition: border-color .25s, background .25s, color .25s, transform .25s;
+}
+.record-dialog .close-dialog:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #160b0d;
+  transform: rotate(90deg);
+}
+.record-dialog .close-dialog:focus-visible,
+.related-records button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.record-showcase {
+  position: relative;
+  min-height: 348px;
+  margin: 30px 34px 0;
+  overflow: hidden;
+  border: 1px solid rgba(237, 189, 121, .68);
+  background:
+    linear-gradient(rgba(237, 189, 121, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 189, 121, .08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 42%, rgba(var(--accent-rgb), .28), transparent 58%),
+    #0b0809;
+  background-size: 38px 38px, 38px 38px, auto, auto;
+}
+.record-showcase::before,
+.record-showcase::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+.record-showcase::before {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+.record-showcase::after {
+  right: 8px;
+  bottom: 8px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+.record-showcase img {
+  position: absolute;
+  inset: 16px 16px 30px;
+  width: calc(100% - 32px);
+  height: calc(100% - 46px);
+  object-fit: contain;
+  filter: drop-shadow(0 18px 20px rgba(0, 0, 0, .62));
+}
+.record-showcase-index {
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  right: 18px;
+  padding: 5px 8px;
+  background: rgba(9, 7, 8, .74);
+  color: var(--gold);
+  font-size: 8px;
+}
+.record-showcase-corner {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 5px rgba(var(--accent-rgb), .16), 0 0 14px rgba(var(--accent-rgb), .7);
+}
+.record-showcase figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 11px;
+  color: rgba(245, 232, 207, .56);
+  font-size: 8px;
+}
+
+.record-section { margin: 0 34px; padding: 34px 0; border-bottom: 1px solid rgba(245, 232, 207, .12); }
+.record-section-heading {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 21px;
+}
+.record-section-heading > span {
+  color: var(--red);
+  font: 500 10px "DM Mono", monospace;
+}
+.record-section-heading h3 { margin: 0; font-size: 18px; letter-spacing: .12em; }
+.record-section-heading small { color: #806f65; font-size: 8px; }
+.record-facts dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border: 1px solid rgba(237, 189, 121, .18); }
+.record-facts dl div { min-height: 76px; padding: 15px; }
+.record-facts dl div:nth-child(odd) { border-right: 1px solid rgba(237, 189, 121, .18); }
+.record-facts dl div:nth-child(-n + 2) { border-bottom: 1px solid rgba(237, 189, 121, .18); }
+.record-facts dt { margin-bottom: 7px; color: #8e7969; font: 9px "DM Mono", monospace; letter-spacing: .12em; }
+.record-facts dd { margin: 0; color: #ead9bd; font-size: 13px; line-height: 1.55; }
+.record-research { margin: 0; color: #d9c6af; font-size: 13px; line-height: 2.05; text-align: justify; }
+
+.record-quote {
+  position: relative;
+  margin: 0;
+  padding: 26px 27px 22px 31px;
+  overflow: hidden;
+  border: 1px solid rgba(237, 189, 121, .28);
+  border-left: 3px solid var(--gold);
+  background:
+    linear-gradient(105deg, rgba(237, 189, 121, .09), transparent 52%),
+    repeating-linear-gradient(0deg, rgba(245, 232, 207, .018) 0 1px, transparent 1px 5px),
+    #171011;
+}
+.record-quote > span {
+  position: absolute;
+  top: -30px;
+  right: 10px;
+  color: rgba(237, 189, 121, .065);
+  font-size: 112px;
+  font-weight: 900;
+  line-height: 1;
+}
+.record-quote p { position: relative; margin: 0; color: #ead7b9; font-size: 14px; line-height: 2; }
+.record-quote p::before { content: "「"; color: var(--gold); }
+.record-quote p::after { content: "」"; color: var(--gold); }
+.record-quote footer { margin-top: 13px; color: #806f65; font: 8px "DM Mono", monospace; letter-spacing: .12em; }
+
+.record-stats { display: grid; gap: 18px; }
+.record-stat > div:first-child { display: flex; justify-content: space-between; margin-bottom: 8px; color: #d8c6ad; font-size: 11px; }
+.record-stat output { color: var(--gold); font-size: 9px; }
+.record-stat-track { height: 4px; overflow: hidden; background: rgba(245, 232, 207, .1); }
+.record-stat-track i { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--red), var(--gold)); box-shadow: 0 0 12px rgba(237, 189, 121, .38); transition: width .55s ease; }
+
+.record-related { padding-bottom: 44px; border-bottom: 0; }
+.related-records { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.related-records button {
+  min-height: 62px;
+  padding: 10px 8px;
+  border: 1px solid rgba(237, 189, 121, .24);
+  background: rgba(245, 232, 207, .025);
+  color: #d8c6ad;
+  font-family: "Noto Serif SC", serif;
+  cursor: pointer;
+  transition: border-color .25s, background .25s, color .25s;
+}
+.related-records button:hover,
+.related-records button[aria-current="true"] { border-color: var(--gold); background: rgba(237, 189, 121, .1); color: var(--gold); }

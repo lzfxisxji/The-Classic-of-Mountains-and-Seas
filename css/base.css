@@ -1,0 +1,40 @@
+/* ============================================================
+   base.css — 基础重置与全局排版
+   仅放置全局级 reset、根容器与氛围纹理层。
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "Noto Serif SC", serif;
+}
+
+/* 主容器：整个档案局视口 */
+.archive {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: #0d0809;
+}
+
+/* 颗粒噪点纹理：全局氛围叠加层（soft-light 混合） */
+.grain {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}

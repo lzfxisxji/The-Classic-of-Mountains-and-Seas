@@ -1,0 +1,317 @@
+/* ============================================================
+   responsive.css — 响应式与偏好媒体查询
+   集中管理所有 @media 规则，便于一处查看与调整断点。
+   采用移动优先思路：max-width 递减排列（小断点后写、覆盖大断点），
+   另含触摸设备适配与大屏收口。
+   断点基准见 tokens.css 顶部「响应式断点体系」。
+   ============================================================ */
+
+/* =========================================================
+   桌面：隐藏移动端汉堡菜单（桌面已有 nav 主导航）
+   ========================================================= */
+@media (min-width: 781px) {
+  .menu { display: none; }
+}
+
+/* =========================================================
+   平板 / 小笔记本：≤1024px
+   覆盖 781–1024 区间。Hero 改用自适应高度防止矮视口文案被裁，
+   异兽插画与展柜图放宽空间避免被舞台裁切。
+   ========================================================= */
+@media (max-width: 1024px) {
+  /* 首屏：平板高度有限，改用 min-height 自适应，避免文案溢出覆盖下方板块 */
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    padding-top: 130px;
+    padding-bottom: 90px;
+    grid-template-columns: minmax(290px, 1fr) 1fr;
+  }
+  .hero h1 { font-size: clamp(52px, 7.4vw, 92px); }
+
+  /* 异兽舞台给插画更多横向空间，避免被裁切 */
+  .beast-stage { inset: 0 0 0 40%; }
+  .beast { width: min(54vw, 600px); right: -7%; bottom: -11%; }
+  .specimen-art { width: min(39vw, 500px); height: min(80vh, 740px); right: 1%; }
+
+  /* 底部数据条收窄，避免与窄屏 padding 冲突 */
+  .data-strip { left: clamp(20px, 6vw, 96px); right: clamp(20px, 4vw, 72px); }
+
+  /* 地图与索引间距收紧 */
+  .map-grid { gap: clamp(22px, 3vw, 44px); }
+  .record-rail { gap: 10px; }
+
+  /* 板块标题在中等宽度下略微收敛 */
+  .records-heading h2,
+  .map-heading h2 { font-size: clamp(22px, 3vw, 30px); }
+
+  /* 概述板块：平板下数据条转 2×2，十八卷海经列收窄 */
+  .overview-figures { grid-template-columns: repeat(2, 1fr); }
+  .overview-system { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+
+  /* 导航：平板缩小间距，容纳新增的山经体系 / 文化影响锚点 */
+  .topbar nav { gap: 18px; }
+
+  /* 山经体系：平板下罗盘与卡片堆叠为单列 */
+  .canon-body { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* =========================================================
+   手机 / 小平板：≤780px
+   Hero 单列堆叠，档案索引横滑，地图与档案抽屉收紧。
+   （原独立 specimen-art 块已合并于此，避免重复 @media）
+   ========================================================= */
+@media (max-width: 780px) {
+
+  /* ---------- 顶栏 ---------- */
+  .topbar { height: 70px; }
+  .wordmark span,
+  nav { display: none; }
+
+  /* ---------- 首屏 ---------- */
+  .hero {
+    height: auto;
+    min-height: 790px;
+    display: block;
+    padding: 125px 26px 330px;
+  }
+  .hero-copy { max-width: 100%; }
+  .hero h1 { font-size: 68px; }
+  .beast-stage { inset: 36% -16% 0 8%; }
+  .beast {
+    width: 580px;
+    right: -55px;
+    bottom: -99px;
+  }
+  .sun-disc {
+    width: 125vw;
+    right: -42vw;
+    top: 26%;
+  }
+  .coordinates { display: none; }
+  .specimen-stamp { right: 17%; top: 11%; }
+  .label-top { right: 16%; }
+
+  /* ---------- 底部数据条 ---------- */
+  .data-strip {
+    bottom: 20px;
+    left: 22px;
+    right: 22px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .data-cell {
+    min-height: 48px;
+    padding: 8px 10px;
+  }
+  .data-cell b { font-size: 12px; }
+  .data-cell:nth-child(3) { border-left: 0; }
+
+  /* ---------- 移动导航面板 ---------- */
+  .mobile-nav {
+    display: block;
+    position: fixed;
+    z-index: 19;
+    top: 70px;
+    left: 0;
+    right: 0;
+    padding: 10px 22px 20px;
+    background: rgba(13, 8, 9, .98);
+    border-bottom: 1px solid rgba(237, 189, 121, .22);
+    transform: translateY(-14px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s, transform .25s, visibility .25s;
+  }
+  .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); }
+  .mobile-nav a {
+    display: block;
+    padding: 14px 4px;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: .06em;
+    border-bottom: 1px solid rgba(245, 232, 207, .08);
+  }
+  .mobile-nav a:last-child { border-bottom: 0; }
+  .mobile-nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+  /* ---------- 档案索引 ---------- */
+  /* 工具栏：移动端纵向堆叠，分类标签可横滑 */
+  .records-toolbar { flex-direction: column; align-items: stretch; }
+  .records-search-wrap { max-width: none; }
+  .records-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+
+  .records,
+  .map-section { padding: 48px 20px; }
+
+  /* ---------- 序厅 + 概述（移动端） ---------- */
+  .hero-wall { display: none; }
+  .overview { padding: 64px 20px; }
+  .overview-figures { grid-template-columns: repeat(2, 1fr); }
+  .overview-system { grid-template-columns: 1fr; gap: 20px; }
+  .overview-note { grid-template-columns: 1fr; gap: 22px; }
+  .volume-list--sea { grid-template-columns: repeat(3, 1fr); }
+  .record-rail {
+    display: flex;
+    overflow: auto;
+    padding-bottom: 10px;
+  }
+  .record-card { min-width: 170px; }
+
+  /* ---------- 观测地图 ---------- */
+  .map-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .map-legend {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 26px;
+  }
+  .map-board { min-height: 430px; }
+  .map-heading h2 { font-size: 34px; }
+
+  /* ---------- 页脚 ---------- */
+  footer {
+    font-size: 8px;
+    padding: 16px 20px;
+  }
+
+  /* ---------- 研究档案抽屉 ---------- */
+  .record-dialog {
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    border: 0;
+  }
+  .record-drawer-header { padding: 28px 24px 22px; }
+  .record-showcase { min-height: 330px; margin: 24px 24px 0; }
+  .record-section { margin-inline: 24px; }
+
+  /* ---------- 异兽展柜图 ---------- */
+  .specimen-art {
+    right: 3%;
+    bottom: -8%;
+    width: min(82vw, 470px);
+    height: min(59vh, 610px);
+  }
+  .specimen-art::before { border-width: 8px; }
+
+  /* ---------- 山经体系 + 文化影响（移动端） ---------- */
+  .canon { padding: 64px 20px; }
+  .canon-body { gap: 30px; }
+  .compass-svg { width: min(74%, 320px); }
+  .canon-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+  .legacy { padding: 64px 20px; }
+  .legacy-grid { grid-template-columns: 1fr; }
+  .legacy-axis { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================================================
+   超小屏手机：≤430px
+   地图节点与档案抽屉进一步收紧，单列排版。
+   ========================================================= */
+@media (max-width: 430px) {
+  .map-section { padding: 48px 14px; }
+  .overview-figures { grid-template-columns: repeat(2, 1fr); }
+  .volume-list { grid-template-columns: repeat(3, 1fr); }
+  .map-grid { margin-top: 28px; }
+  .map-board { min-height: 370px; }
+  .map-astrolabe { width: 72%; }
+  .map-region { width: 48px; height: 48px; }
+  .map-node-tooltip { min-width: 110px; padding: 7px 8px; }
+  .map-node-tooltip strong { font-size: 12px; }
+  .map-region[data-beast="yinglong"] { top: 22%; left: 14%; }
+  .map-region[data-beast="bailu"] { top: 20%; right: 12%; }
+  .map-region[data-beast="jingwei"] { right: 10%; bottom: 21%; }
+  .map-region[data-beast="kuiniu"] { bottom: 17%; left: 17%; }
+  .map-region[data-beast="bailu"] .map-node-tooltip,
+  .map-region[data-beast="jingwei"] .map-node-tooltip { right: -17px; left: auto; transform: translateY(4px); }
+  .map-region[data-beast="bailu"]:hover .map-node-tooltip,
+  .map-region[data-beast="bailu"]:focus-visible .map-node-tooltip,
+  .map-region[data-beast="jingwei"]:hover .map-node-tooltip,
+  .map-region[data-beast="jingwei"]:focus-visible .map-node-tooltip { transform: none; }
+  .map-legend { min-height: 460px; padding: 24px 22px; }
+  .map-legend-status { font-size: 8px; }
+  .map-legend-place h3 { font-size: 27px; }
+  .map-legend-specimen > strong { font-size: 36px; }
+
+  .record-drawer-header { padding: 24px 18px 19px; }
+  .record-dialog .close-dialog { flex-basis: 38px; width: 38px; height: 38px; }
+  .record-showcase { min-height: 285px; margin: 18px 18px 0; }
+  .record-section { margin-inline: 18px; padding-block: 29px; }
+  .record-section-heading { grid-template-columns: auto 1fr; }
+  .record-section-heading small { display: none; }
+  .record-facts dl { grid-template-columns: 1fr; }
+  .record-facts dl div:nth-child(odd) { border-right: 0; }
+  .record-facts dl div:nth-child(-n + 3) { border-bottom: 1px solid rgba(237, 189, 121, .18); }
+  .record-quote { padding: 23px 21px 20px 24px; }
+  .related-records { grid-template-columns: 1fr; }
+
+  /* 山经体系 + 文化影响（超小屏） */
+  .canon-grid { grid-template-columns: repeat(2, 1fr); }
+  .legacy-axis { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   触摸设备：hover:none 且 pointer:coarse
+   触屏没有 hover 状态，隐藏依赖悬停的地图提示（改由点击节点
+   更新右侧图例完成交互），并优化触屏点击质感与反馈。
+   ========================================================= */
+@media (hover: none) and (pointer: coarse) {
+  /* 触屏无悬停，隐藏地图 tooltip，避免无谓堆叠 */
+  .map-node-tooltip { display: none; }
+
+  /* 轻缩放替代 hover 高亮，作为触屏点击反馈 */
+  .map-region:active { transform: scale(1.08); }
+
+  /* 去除默认点击高亮闪烁，提升触屏质感 */
+  a,
+  button,
+  .record-card,
+  .map-region,
+  .map-index-link {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* =========================================================
+   大屏收口：≥1440px
+   内容收口居中，避免首屏异兽与文案、档案索引在大屏被拉太开。
+   ========================================================= */
+@media (min-width: 1440px) {
+  .records,
+  .map-section {
+    padding-left: clamp(80px, 8vw, 200px);
+    padding-right: clamp(80px, 8vw, 200px);
+  }
+  .record-rail {
+    max-width: 1500px;
+    margin-inline: auto;
+    gap: 14px;
+  }
+}
+
+/* =========================================================
+   动效偏好：尊重系统的"减少动态效果"设置
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  /* 关闭滚动揭示的隐藏初态，直接显示内容 */
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .map-board::before,
+  .map-terrain { transform: none !important; }
+  .record-dialog,
+  .record-dialog[open],
+  .record-dialog[open]::backdrop,
+  .record-stat-track i { animation: none !important; transition: none !important; }
+  .record-dialog[open] { transform: translateX(0); }
+}

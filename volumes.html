@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="山海档案局卷册库：按山经、海经与大荒经检索异兽观测档案。" />
+    <title>卷册库｜山海档案局</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/library.css" />
+  </head>
+  <body class="library-page">
+    <div class="library-archive">
+      <div class="grain" aria-hidden="true"></div>
+
+      <header class="library-topbar">
+        <a class="library-wordmark" href="index.html#archive" aria-label="返回山海档案局首页">
+          <span>SHANHAI</span><i aria-hidden="true"></i><b>山海档案局</b>
+        </a>
+        <nav class="library-nav" aria-label="主导航">
+          <a href="index.html#records">异兽档案</a>
+          <a class="active" href="volumes.html" aria-current="page">卷册库</a>
+          <a href="index.html#map">观测地图</a>
+        </nav>
+        <span class="bureau-mark" aria-hidden="true">典藏 / 04</span>
+      </header>
+
+      <main class="library-main">
+        <header class="library-heading">
+          <div>
+            <p class="library-kicker">ARCHIVE VOLUMES · 观测档案索引</p>
+            <h1>卷册库</h1>
+          </div>
+          <p class="library-intro">循山川海荒之序，检索已封存的异兽观测记录。卷签状态将保留于当前地址。</p>
+        </header>
+
+        <section class="library-catalogue" aria-labelledby="catalogue-title">
+          <div class="catalogue-margin">
+            <p id="catalogue-title">卷签</p>
+            <nav class="volume-tabs" aria-label="卷册分类">
+              <a href="volumes.html?volume=all" data-volume="all">全部</a>
+              <a href="volumes.html?volume=mountains" data-volume="mountains">山经</a>
+              <a href="volumes.html?volume=seas" data-volume="seas">海经</a>
+              <a href="volumes.html?volume=wilderness" data-volume="wilderness">大荒经</a>
+            </nav>
+          </div>
+
+          <div class="catalogue-leaf">
+            <div class="catalogue-meta">
+              <p><span>当前卷册</span><b id="active-volume-label">全部卷册</b></p>
+              <p><span>开放档案</span><b id="volume-count">00</b></p>
+            </div>
+            <div id="volume-grid" class="volume-grid" aria-live="polite"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="library-footer">
+        <span>山海档案局 / SHANHAI ARCHIVE BUREAU</span>
+        <span>卷册编号 SHB–VOLUME–2026</span>
+      </footer>
+    </div>
+
+    <script type="module" src="js/library.js"></script>
+  </body>
+</html>

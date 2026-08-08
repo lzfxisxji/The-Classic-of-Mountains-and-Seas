@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10090a" />
+    <title>山海档案局 — 异兽档案站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="assets/dragon.png" fetchpriority="high" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <main class="archive" id="archive">
+      <div class="grain" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="wordmark" href="#archive" aria-label="山海档案局首页"><span>SHANHAI</span><i></i><b>山海档案局</b></a>
+        <nav aria-label="主导航"><a class="active" href="#archive">异兽档案</a><a href="#overview">山海概述</a><a href="#canon">山经体系</a><a href="#records">古卷索引</a><a href="#map">观测地图</a><a href="#legacy">文化影响</a></nav>
+        <div class="top-actions"><button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false">环境音 · 关</button><button class="menu" type="button" aria-label="打开菜单"><span></span><span></span></button></div>
+      </header>
+
+      <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航">
+        <a href="#archive">异兽档案</a>
+        <a href="#overview">山海概述</a>
+        <a href="#canon">山经体系</a>
+        <a href="#records">古卷索引</a>
+        <a href="#map">观测地图</a>
+        <a href="#legacy">文化影响</a>
+      </nav>
+
+<section class="hero" aria-labelledby="beast-name">
+        <div class="hero-wall" aria-hidden="true"><span>山海档案局</span><span>序厅 · PROLOGUE HALL</span></div>
+        <div class="mountains" aria-hidden="true"></div><div class="sun-disc" aria-hidden="true"></div><div class="halo" aria-hidden="true"></div>
+        <div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div><div class="cloud cloud-three" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="hero-intro">山海档案局 · 序厅 · 一座收藏上古异兽的数字博物馆</p>
+          <p class="eyebrow"><span>NO. <span data-field="no">001</span></span> / <span data-field="source">南山经·南次三经</span></p>
+          <p class="seal"><span data-field="rank">甲级</span>观测对象</p>
+          <h1 id="beast-name" data-field="name">赤羽应龙</h1>
+          <p class="latin" data-field="latin">YINGLONG · CELESTIAL DRAKE</p>
+          <p class="description" data-field="description">生于赤水之北，翼展如云，鳞甲映日若熔金。古卷称其能行云布雨，司四方水脉之变。</p>
+          <div class="hero-actions"><button class="scan-button" id="open-record" type="button"><span class="play">↗</span> 展开异兽档案</button><span class="coordinates">E 109°18′ / N 34°16′</span></div>
+          <a class="hero-scroll" href="#overview" aria-label="向下浏览山海经概述"><span class="hero-scroll__label">展开卷轴</span><span class="hero-scroll__chevron" aria-hidden="true"></span></a>
+        </div>
+        <div class="beast-stage" data-specimen="yinglong" aria-label="原创异兽档案图像">
+          <div class="axis axis-x"></div><div class="axis axis-y"></div><span class="stage-label label-top">SOUTHERN RANGE / 07</span><span class="stage-label label-bottom">OBSERVATION IN PROGRESS</span>
+          <figure class="specimen-art"><img id="specimen-image" src="assets/dragon.png" alt="赤羽应龙原创异兽档案图" decoding="async" fetchpriority="high" /><span class="art-reflection" aria-hidden="true"></span></figure>
+          <div class="specimen-stamp"><b data-field="seal">瑞</b><span>SEAL / <span data-field="no">001</span></span></div>
+        </div>
+        <div class="data-strip" aria-label="异兽数据"><div class="data-cell"><span>档案编号</span><b data-field="no">001</b></div><div class="data-cell"><span>观测区域</span><b data-field="region">赤水之北</b></div><div class="data-cell"><span>风险等级</span><b data-field="rank">甲级</b></div><div class="data-cell"><span>异能谱系</span><b data-field="element">水脉 / 云雨</b></div></div>
+      </section>
+
+      <section class="overview" id="overview" aria-labelledby="overview-title">
+        <div class="overview-inner">
+          <header class="overview-head" data-reveal>
+            <p class="overview-eyebrow">ABOUT THE CLASSIC / 关于山海经</p>
+            <h2 id="overview-title" class="overview-title">一部写满神异的<em>上古地理博物志</em></h2>
+            <p class="overview-lead">《山海经》是中国先秦重要古籍，作者与成书年代已不可考。它并非一人一时之作，而是先民对天下山川、神祇异兽与远方国族的集体记忆，自战国至汉初陆续编成，经刘歆校订而传世。</p>
+          </header>
+
+          <div class="overview-figures" data-reveal>
+            <div class="figure"><span class="figure__num">18</span><span class="figure__label">现存卷数</span><span class="figure__sub">山经五 · 海经十三</span></div>
+            <div class="figure"><span class="figure__num">3.1万</span><span class="figure__label">存世字数</span><span class="figure__sub">言简而意丰</span></div>
+            <div class="figure"><span class="figure__num">战国–汉</span><span class="figure__label">成书年代</span><span class="figure__sub">非一时一人</span></div>
+            <div class="figure"><span class="figure__num">百科</span><span class="figure__label">历史定位</span><span class="figure__sub">上古社会百科全书</span></div>
+          </div>
+
+          <div class="overview-system" data-reveal>
+            <div class="system-col system-col--mountain">
+              <h3 class="system-title">五藏山经 <span>5 卷</span></h3>
+              <ul class="volume-list">
+                <li><b>南</b>山经</li><li><b>西</b>山经</li><li><b>北</b>山经</li><li><b>东</b>山经</li><li><b>中</b>山经</li>
+              </ul>
+            </div>
+            <div class="system-col system-col--sea">
+              <h3 class="system-title">海 经 <span>13 卷</span></h3>
+              <ul class="volume-list volume-list--sea">
+                <li>海外南经</li><li>海外西经</li><li>海外北经</li><li>海外东经</li>
+                <li>海内南经</li><li>海内西经</li><li>海内北经</li><li>海内东经</li>
+                <li>大荒东经</li><li>大荒南经</li><li>大荒西经</li><li>大荒北经</li>
+                <li class="volume-list__solo">海内经</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="overview-note" data-reveal>
+            <blockquote class="overview-quote">鲁迅先生评其为「盖古之巫书也」—— 山川、神祇、异物、远方，皆在尺幅之间。</blockquote>
+            <p class="overview-desc">其内容横跨地理、神话、巫术、宗教、古史、医药与民俗，不仅奠定了后世志怪小说的母题，更成为研究上古信仰与天下观的珍贵文献。本站以数字之形，重现其中异兽之一隅。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="canon" id="canon" aria-labelledby="canon-title">
+        <div class="canon-inner">
+          <header class="canon-head" data-reveal>
+            <p class="canon-eyebrow">CARTOGRAPHIC SYSTEM / 地理分卷</p>
+            <h2 id="canon-title" class="canon-title">以方位分卷的<em>上古天下图</em></h2>
+            <p class="canon-lead">《山海经》依方位列卷，先述五方诸山，再及四海大荒。本站以数字罗盘重绘其经纬，点选已收录的经部，即可调阅对应异兽档案。</p>
+          </header>
+
+          <div class="canon-body">
+            <div class="canon-compass" data-reveal aria-hidden="true">
+              <svg class="compass-svg" viewBox="0 0 400 400" role="presentation">
+                <g class="compass-ring">
+                  <circle cx="200" cy="200" r="178" />
+                  <circle cx="200" cy="200" r="148" class="compass-dash" />
+                  <circle cx="200" cy="200" r="92" />
+                  <line x1="200" y1="22" x2="200" y2="378" />
+                  <line x1="22" y1="200" x2="378" y2="200" />
+                </g>
+                <path class="compass-sea" d="M 200 22 A 178 178 0 0 1 378 200 A 178 178 0 0 1 200 378" />
+                <g class="compass-poi">
+                  <circle cx="200" cy="58" r="15" />
+                  <circle cx="200" cy="342" r="15" />
+                  <circle cx="58" cy="200" r="15" />
+                  <circle cx="342" cy="200" r="15" />
+                </g>
+                <g class="compass-label">
+                  <text x="200" y="44" text-anchor="middle">北</text>
+                  <text x="200" y="370" text-anchor="middle">南</text>
+                  <text x="36" y="205" text-anchor="middle">西</text>
+                  <text x="364" y="205" text-anchor="middle">东</text>
+                </g>
+                <rect class="compass-core" x="172" y="172" width="56" height="56" transform="rotate(45 200 200)" />
+                <text class="compass-center" x="200" y="209" text-anchor="middle">中</text>
+              </svg>
+            </div>
+
+            <div class="canon-volumes" data-reveal>
+              <div class="canon-group">
+                <h3 class="canon-group__title">五藏山经 <span>5 卷</span></h3>
+                <div class="canon-grid">
+                  <a class="canon-card" href="#records" data-go-filter="南山经">
+                    <span class="canon-card__name">南山经</span>
+                    <span class="canon-card__meta">卷一 · 南次三经</span>
+                    <span class="canon-card__state">已收录 1 异兽</span>
+                  </a>
+                  <div class="canon-card is-locked" aria-disabled="true">
+                    <span class="canon-card__name">西山经</span>
+                    <span class="canon-card__meta">卷二 · 西次三经</span>
+                    <span class="canon-card__state">待补录</span>
+                  </div>
+                  <a class="canon-card" href="#records" data-go-filter="北山经">
+                    <span class="canon-card__name">北山经</span>
+                    <span class="canon-card__meta">卷三 · 北次三经</span>
+                    <span class="canon-card__state">已收录 1 异兽</span>
+                  </a>
+                  <a class="canon-card" href="#records" data-go-filter="东山经">
+                    <span class="canon-card__name">东山经</span>
+                    <span class="canon-card__meta">卷四 · 东次三经</span>
+                    <span class="canon-card__state">已收录 1 异兽</span>
+                  </a>
+                  <div class="canon-card is-locked" aria-disabled="true">
+                    <span class="canon-card__name">中山经</span>
+                    <span class="canon-card__meta">卷五 · 中次十二经</span>
+                    <span class="canon-card__state">待补录</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="canon-group">
+                <h3 class="canon-group__title">海 经 <span>13 卷</span></h3>
+                <div class="canon-grid">
+                  <a class="canon-card" href="#records" data-go-filter="东海经">
+                    <span class="canon-card__name">东海经</span>
+                    <span class="canon-card__meta">海外东经 · 海内东经</span>
+                    <span class="canon-card__state">已收录 1 异兽</span>
+                  </a>
+                  <div class="canon-card is-locked" aria-disabled="true">
+                    <span class="canon-card__name">海内·海外</span>
+                    <span class="canon-card__meta">海外四经 · 海内四经</span>
+                    <span class="canon-card__state">待补录</span>
+                  </div>
+                  <div class="canon-card is-locked" aria-disabled="true">
+                    <span class="canon-card__name">大荒·海内</span>
+                    <span class="canon-card__meta">大荒四经 · 海内经</span>
+                    <span class="canon-card__state">待补录</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="records" id="records" aria-labelledby="records-title"><div class="records-heading"><p>SELECT SPECIMEN</p><h2 id="records-title">四海异兽 · <em>档案索引</em></h2><span>04 / 04</span></div><div class="records-toolbar"><div class="records-search-wrap"><span class="records-search-icon" aria-hidden="true">&#9906;</span><input class="records-search" id="records-search" type="search" placeholder="检索异兽 · 编号 · 经部" aria-label="检索异兽档案" autocomplete="off" /></div><div class="records-filters" role="group" aria-label="按经部筛选"><button class="filter-chip active" type="button" data-filter="all">全部</button><button class="filter-chip" type="button" data-filter="南山经">南山经</button><button class="filter-chip" type="button" data-filter="东山经">东山经</button><button class="filter-chip" type="button" data-filter="北山经">北山经</button><button class="filter-chip" type="button" data-filter="东海经">东海经</button></div></div><div class="record-rail" role="tablist" aria-label="异兽选择"><button class="record-card active" data-beast="yinglong" data-category="南山经" role="tab" aria-selected="true"><span class="card-no">001</span><span class="card-art yinglong-art" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 66 C20 58 26 50 36 48 C44 46 50 52 54 46 C58 40 54 32 46 32 C40 32 36 38 38 44" /><path d="M38 44 C34 34 42 24 54 24 C62 24 68 30 66 38 C64 44 56 44 50 42" /><path d="M54 46 C62 54 72 54 78 48 C82 44 80 36 74 34 C68 32 62 38 60 42" /><path d="M48 52 L42 64 M56 50 L60 62 M46 44 L38 48" /></g></svg></span><strong>赤羽应龙</strong><small>南山经</small></button><button class="record-card" data-beast="bailu" data-category="东山经" role="tab" aria-selected="false"><span class="card-no">002</span><span class="card-art baize-art" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M34 40 C30 24 22 18 18 24 C22 28 28 32 30 42" /><path d="M34 40 L26 42 L24 48 L34 52 L44 50 C56 48 68 52 74 62 C76 68 72 74 64 72 C56 70 50 64 46 58" /><path d="M46 58 L46 76 M52 60 L52 78 M64 64 L66 78 M70 62 L76 76" /><path d="M76 62 C84 56 90 60 88 68 C86 74 78 72 76 66" /><path d="M34 52 C38 48 44 50 46 54" /><path d="M22 78 C28 74 34 78 32 84 M38 80 C44 76 50 80 48 86" /></g></svg></span><strong>白泽</strong><small>东山经</small></button><button class="record-card" data-beast="jingwei" data-category="北山经" role="tab" aria-selected="false"><span class="card-no">003</span><span class="card-art jingwei-art" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M32 42 L20 44 M24 42 L22 38 M28 44 L26 48" /><path d="M32 42 L38 40 C46 44 50 52 48 62 C46 70 40 74 34 70 C30 66 32 56 38 50" /><path d="M38 44 C28 34 18 36 22 46 C26 50 34 48 40 46" /><path d="M40 54 C30 56 24 64 28 70 C34 72 42 64 46 56" /><path d="M48 62 C56 70 70 72 78 66 C82 62 80 56 76 54 C72 58 64 60 56 58" /></g></svg></span><strong>精卫</strong><small>北山经</small></button><button class="record-card" data-beast="kuiniu" data-category="东海经" role="tab" aria-selected="false"><span class="card-no">004</span><span class="card-art kuiniu-art" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M34 44 C28 24 20 18 14 24 C20 30 28 34 32 44" /><path d="M66 44 C72 24 80 18 86 24 C80 30 72 34 68 44" /><path d="M34 44 C34 56 42 62 50 62 C58 62 66 56 66 44 C60 36 40 36 34 44" /><circle cx="44" cy="50" r="1.3" /><circle cx="56" cy="50" r="1.3" /><path d="M46 56 L54 56" /><path d="M36 60 C28 68 28 78 36 84 C44 88 56 88 64 84 C72 78 72 68 64 60" /><path d="M46 86 L46 96 M40 96 L58 96" /><path d="M22 72 L28 78 L22 84 M78 72 L72 78 L78 84" /><path d="M18 86 C24 82 30 86 28 92 M72 86 C66 82 60 86 62 92" /></g></svg></span><strong>夔牛</strong><small>东海经</small></button></div><p class="records-empty is-hidden">未检索到匹配的异兽档案</p></section>
+
+      <section class="map-section" id="map" aria-labelledby="map-title">
+        <div class="map-heading">
+          <p>ASTRAL GEOGRAPHY / 04 SEALED MARKERS</p>
+          <h2 id="map-title">山海观测 · <em>经纬铜盘</em></h2>
+        </div>
+        <div class="map-grid">
+          <div class="map-board" data-active-beast="yinglong" aria-label="山海异兽经纬观测地图">
+            <span class="map-corner corner-nw" aria-hidden="true"></span>
+            <span class="map-corner corner-ne" aria-hidden="true"></span>
+            <span class="map-corner corner-sw" aria-hidden="true"></span>
+            <span class="map-corner corner-se" aria-hidden="true"></span>
+            <span class="map-axis-label axis-north" aria-hidden="true">N / 天枢</span>
+            <span class="map-axis-label axis-east" aria-hidden="true">E / 海隅</span>
+            <span class="map-scan" aria-hidden="true"></span>
+
+            <div class="map-astrolabe" aria-hidden="true">
+              <span class="astrolabe-ring ring-outer"><i>山经</i></span>
+              <span class="astrolabe-ring ring-middle"><i>海经</i></span>
+              <span class="astrolabe-ring ring-inner"><i>荒经</i></span>
+              <span class="astrolabe-heart"></span>
+            </div>
+
+            <svg class="map-terrain" viewBox="0 0 720 500" preserveAspectRatio="none" aria-hidden="true">
+              <g class="terrain-mountains">
+                <path d="M36 337 L93 275 L127 318 L174 226 L214 294 L257 190 L305 278 L351 218 L395 303" />
+                <path d="M301 366 L346 329 L379 351 L417 292 L453 338 L493 257 L540 321 L581 279 L637 347 L694 301" />
+                <path class="terrain-ridge" d="M77 374 Q157 332 232 361 T382 349 T537 369 T684 343" />
+              </g>
+              <g class="terrain-waters">
+                <path d="M25 122 Q112 91 179 126 T316 113 T454 139 T593 105 T712 124" />
+                <path d="M31 145 Q116 119 184 151 T326 139 T467 164 T604 132 T704 148" />
+                <path class="terrain-river" d="M332 41 C302 106 368 137 336 202 S283 311 350 459" />
+              </g>
+              <g class="terrain-clouds">
+                <path d="M99 191 c15-22 39-18 46 1 18-13 45-2 45 18-25 9-69 7-91-1" />
+                <path d="M512 197 c16-24 42-19 49 3 20-14 49-2 48 21-28 9-75 7-97-2" />
+                <path d="M421 89 c11-16 29-13 34 2 14-10 34-1 34 15-20 7-52 5-68-2" />
+              </g>
+              <g class="observation-routes">
+                <path class="map-route" data-route="yinglong" d="M360 250 Q261 184 160 154" />
+                <path class="map-route" data-route="bailu" d="M360 250 Q466 159 571 139" />
+                <path class="map-route" data-route="jingwei" d="M360 250 Q477 315 588 371" />
+                <path class="map-route" data-route="kuiniu" d="M360 250 Q248 329 179 390" />
+              </g>
+            </svg>
+
+            <button class="map-region active" type="button" data-beast="yinglong" aria-label="南山·赤水，赤羽应龙" aria-pressed="true"><span>01</span><small class="map-node-tooltip"><b>NO. 01</b><em>南山·赤水</em><strong>赤羽应龙</strong></small></button>
+            <button class="map-region" type="button" data-beast="bailu" aria-label="北山·灵泽，白泽" aria-pressed="false"><span>02</span><small class="map-node-tooltip"><b>NO. 02</b><em>北山·灵泽</em><strong>白泽</strong></small></button>
+            <button class="map-region" type="button" data-beast="jingwei" aria-label="东海·发鸠，精卫" aria-pressed="false"><span>03</span><small class="map-node-tooltip"><b>NO. 03</b><em>东海·发鸠</em><strong>精卫</strong></small></button>
+            <button class="map-region" type="button" data-beast="kuiniu" aria-label="西山·流波，夔牛" aria-pressed="false"><span>04</span><small class="map-node-tooltip"><b>NO. 04</b><em>西山·流波</em><strong>夔牛</strong></small></button>
+          </div>
+
+          <aside class="map-legend" aria-label="当前观测档案" aria-live="polite">
+            <div class="map-legend-status"><span><i></i> LIVE OBSERVATION</span><b>封印已锁定</b></div>
+            <div class="map-legend-place"><span>OBSERVATION SITE</span><h3 data-map-label>南山·赤水</h3></div>
+            <div class="map-legend-specimen"><span>SPECIMEN</span><strong data-field="name">赤羽应龙</strong></div>
+            <dl class="map-legend-data"><div><dt>ARCHIVE NO</dt><dd data-field="no">001</dd></div><div><dt>RISK LEVEL</dt><dd data-field="rank">甲级</dd></div><div><dt>ABILITY</dt><dd data-field="element">水脉 / 云雨</dd></div></dl>
+            <p class="map-legend-note">点击铜盘封印节点调取对应异兽。图中山线、海路与云气均为原创观测图形，不对应现实地点。</p>
+            <button class="map-index-link" type="button">调取异兽档案 <span>→</span></button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="legacy" id="legacy" aria-labelledby="legacy-title">
+        <div class="legacy-inner">
+          <header class="legacy-head" data-reveal>
+            <p class="legacy-eyebrow">CULTURAL LEGACY / 后世回响</p>
+            <h2 id="legacy-title" class="legacy-title">一部书，<em>喂养了千年想象</em></h2>
+            <p class="legacy-lead">从志怪小说的母题源头，到当代国风影视与游戏，再到历代校注的学术长河，《山海经》的异兽与神话始终是中华文明想象力的底层坐标。</p>
+          </header>
+
+          <div class="legacy-grid" data-reveal>
+            <article class="legacy-card">
+              <span class="legacy-card__tag">文学源流</span>
+              <h3 class="legacy-card__title">志怪小说的母题之河</h3>
+              <p class="legacy-card__text">《搜神记》《西游记》《聊斋志异》中的精怪、远国与异闻，多可追溯至《山海经》的叙事胚胎。</p>
+            </article>
+            <article class="legacy-card">
+              <span class="legacy-card__tag">影视游戏</span>
+              <h3 class="legacy-card__title">国风改编的灵感矿脉</h3>
+              <p class="legacy-card__text">近年动画、影视与游戏中，应龙、精卫填海等意象被反复借用，成为东方奇幻的视觉母本。</p>
+            </article>
+            <article class="legacy-card">
+              <span class="legacy-card__tag">学术研究</span>
+              <h3 class="legacy-card__title">千年校注的文献长河</h3>
+              <p class="legacy-card__text">郭璞首注，毕沅、郝懿行、袁珂续考，历代学者在地理、神话与民俗之间不断重读这部奇书。</p>
+            </article>
+          </div>
+
+          <div class="legacy-timeline" data-reveal>
+            <p class="legacy-timeline__label">历代校注脉络</p>
+            <ol class="legacy-axis">
+              <li class="legacy-node">
+                <span class="legacy-node__era">晋</span>
+                <div class="legacy-node__body"><b>郭璞《山海经注》</b><small>首开系统注释，奠定训诂基础</small></div>
+              </li>
+              <li class="legacy-node">
+                <span class="legacy-node__era">清</span>
+                <div class="legacy-node__body"><b>毕沅《山海经新校正》</b><small>考据订讹，重理篇卷次第</small></div>
+              </li>
+              <li class="legacy-node">
+                <span class="legacy-node__era">清</span>
+                <div class="legacy-node__body"><b>郝懿行《山海经笺疏》</b><small>集前人之长，笺疏精详</small></div>
+              </li>
+              <li class="legacy-node">
+                <span class="legacy-node__era">现代</span>
+                <div class="legacy-node__body"><b>袁珂《山海经校注》</b><small>现代校释集大成之作</small></div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="record-dialog" id="record-dialog" aria-labelledby="record-title">
+        <article class="record-drawer">
+          <header class="record-drawer-header">
+            <div>
+              <p class="record-kicker">RESEARCH ARCHIVE / NO. <span data-record-field="no">---</span></p>
+              <h2 id="record-title" data-record-field="name">异兽研究档案</h2>
+              <p class="record-latin" data-record-field="latin">SPECIMEN RECORD</p>
+            </div>
+            <button class="close-dialog" id="close-record" type="button" aria-label="关闭异兽研究档案">×</button>
+          </header>
+
+          <figure class="record-showcase">
+            <span class="record-showcase-index" aria-hidden="true">ORIGINAL SPECIMEN</span>
+            <span class="record-showcase-corner" aria-hidden="true"></span>
+            <img data-record-field="image" src="assets/dragon.png" alt="赤羽应龙原画档案" decoding="async" />
+            <figcaption>原创异兽原画 · 观测样本</figcaption>
+          </figure>
+
+          <section class="record-section record-facts" aria-labelledby="record-facts-title">
+            <div class="record-section-heading">
+              <span>01</span>
+              <h3 id="record-facts-title">基础档案</h3>
+              <small>BASIC DATA</small>
+            </div>
+            <dl>
+              <div><dt>典籍来源</dt><dd data-record-field="source">档案待补全</dd></div>
+              <div><dt>观测区域</dt><dd data-record-field="region">档案待补全</dd></div>
+              <div><dt>风险等级</dt><dd data-record-field="rank">档案待补全</dd></div>
+              <div><dt>异能谱系</dt><dd data-record-field="element">档案待补全</dd></div>
+            </dl>
+          </section>
+
+          <section class="record-section" aria-labelledby="record-research-title">
+            <div class="record-section-heading">
+              <span>02</span>
+              <h3 id="record-research-title">研究摘要</h3>
+              <small>FIELD NOTES</small>
+            </div>
+            <p class="record-research" data-record-field="research">档案待补全</p>
+          </section>
+
+          <section class="record-section" aria-labelledby="record-quote-title">
+            <div class="record-section-heading">
+              <span>03</span>
+              <h3 id="record-quote-title">古籍摘录</h3>
+              <small>ARCHIVAL EXCERPT</small>
+            </div>
+            <blockquote class="record-quote">
+              <span aria-hidden="true">卷</span>
+              <p data-record-field="quote">档案待补全</p>
+              <footer>据古籍意译整理 · 非逐字原典</footer>
+            </blockquote>
+          </section>
+
+          <section class="record-section" aria-labelledby="record-stats-title">
+            <div class="record-section-heading">
+              <span>04</span>
+              <h3 id="record-stats-title">属性数据</h3>
+              <small>OBSERVATION METRICS</small>
+            </div>
+            <div class="record-stats">
+              <div class="record-stat"><div><span>力量</span><output data-record-field="strength">--</output></div><div class="record-stat-track" role="progressbar" aria-label="力量" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-record-field="strength-bar"></i></div></div>
+              <div class="record-stat"><div><span>速度</span><output data-record-field="speed">--</output></div><div class="record-stat-track" role="progressbar" aria-label="速度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-record-field="speed-bar"></i></div></div>
+              <div class="record-stat"><div><span>智慧</span><output data-record-field="wisdom">--</output></div><div class="record-stat-track" role="progressbar" aria-label="智慧" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-record-field="wisdom-bar"></i></div></div>
+              <div class="record-stat"><div><span>异能</span><output data-record-field="ability">--</output></div><div class="record-stat-track" role="progressbar" aria-label="异能" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-record-field="ability-bar"></i></div></div>
+              <div class="record-stat"><div><span>危险度</span><output data-record-field="danger">--</output></div><div class="record-stat-track" role="progressbar" aria-label="危险度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-record-field="danger-bar"></i></div></div>
+            </div>
+          </section>
+
+          <nav class="record-section record-related" aria-labelledby="record-related-title">
+            <div class="record-section-heading">
+              <span>05</span>
+              <h3 id="record-related-title">相关档案</h3>
+              <small>RELATED RECORDS</small>
+            </div>
+            <div class="related-records" aria-label="切换相关异兽档案"></div>
+          </nav>
+        </article>
+      </dialog>
+      <footer><span>山海档案局 / SHANHAI ARCHIVE BUREAU</span><span>ALL SPECIMEN VISUALS ARE ORIGINAL</span></footer>
+    </main>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

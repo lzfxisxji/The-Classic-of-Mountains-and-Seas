@@ -1,0 +1,65 @@
+/* ============================================================
+   animations.css — 关键帧动画定义
+   仅集中存放 @keyframes，便于统一管理与复用。
+   各组件通过 animation 属性引用此处定义的动画名。
+   ============================================================ */
+
+/* 内容入场（hero 文案从下方淡入） */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 异兽入场（缩放 + 位移） */
+@keyframes beast-enter {
+  from { opacity: 0; transform: translate(12%, 8%) scale(.91); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 异兽呼吸（悬停时轻微上下浮动） */
+@keyframes beast-breathe {
+  50% { transform: translateY(-8px) scale(1.012); }
+}
+
+/* 异兽眼睛发光 */
+@keyframes eye-glow {
+  50% { filter: drop-shadow(0 0 8px #fff2bc); opacity: .65; }
+}
+
+/* 异兽光晕脉动 */
+@keyframes aura {
+  50% { opacity: .72; transform: scale(1.04); }
+}
+
+/* 云气漂移 */
+@keyframes cloud-drift {
+  50% { transform: translate3d(-65px, -18px, 0) scale(1.1); opacity: .4; }
+}
+
+/* 日轮脉动 */
+@keyframes sun-pulse {
+  50% { filter: blur(3px) brightness(1.15); }
+}
+
+/* 圆环旋转（地图经纬线） */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 地图标记脉冲扩散 */
+@keyframes ping {
+  50% { transform: scale(1.55); opacity: 0; }
+}
+
+/* 印章落定（切换异兽时的盖章动画） */
+@keyframes stamp-hit {
+  0%   { transform: scale(2.5) rotate(-11deg); opacity: 0; }
+  60%  { transform: scale(.86) rotate(14deg); }
+  100% { transform: rotate(12deg); opacity: 1; }
+}
+
+@keyframes glass-sweep {
+  0%, 58% { transform: translateX(-55%) skewX(-12deg); opacity: 0; }
+  66% { opacity: 1; }
+  84%, 100% { transform: translateX(55%) skewX(-12deg); opacity: 0; }
+}
