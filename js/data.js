@@ -1,5 +1,6 @@
 export const beasts = {
   yinglong: {
+    heroImage: 'dragon-cut.png',
     name: '赤羽应龙',
     latin: 'YINGLONG · CELESTIAL DRAKE',
     no: '001',

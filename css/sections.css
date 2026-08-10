@@ -485,6 +485,58 @@ nav .active {
   animation-play-state: running;
 }
 
+/* 透明异兽 Hero：档案卡片只在研究抽屉中使用，首页显示独立的异兽主体。 */
+.specimen-art {
+  overflow: visible;
+  border-color: rgba(239, 189, 121, .24);
+  background: transparent;
+  box-shadow: none;
+  clip-path: none;
+}
+.specimen-art::before {
+  border: 1px solid rgba(239, 189, 121, .24);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, .18);
+}
+.specimen-art::after { display: none; }
+.specimen-art .specimen-image {
+  object-fit: contain;
+  filter: drop-shadow(0 28px 32px rgba(0, 0, 0, .48)) drop-shadow(0 0 24px rgba(var(--accent-rgb), .24));
+  transform: scale(1.06);
+  transition: opacity .36s ease, transform .7s cubic-bezier(.2,.8,.2,1), filter .7s ease;
+}
+.specimen-art .specimen-image:hover {
+  transform: scale(1.09) translateY(-5px);
+  filter: drop-shadow(0 30px 36px rgba(0, 0, 0, .5)) drop-shadow(0 0 32px rgba(var(--accent-rgb), .4));
+}
+.specimen-art.is-interactive .specimen-image { opacity: 1; }
+.specimen-art .specimen-svg { display: none !important; }
+
+/* Hero 右侧仅保留透明异兽本体，取消观测框、光晕与悬浮装饰。 */
+.beast-stage .axis,
+.beast-stage .stage-label,
+.beast-stage .specimen-stamp,
+.beast-stage .specimen-aura,
+.beast-stage .art-reflection,
+.beast-stage .ember-field,
+.beast-stage .halo { display: none !important; }
+.beast-stage .specimen-art,
+.beast-stage:hover .specimen-art {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  transform: none;
+  transition: none;
+}
+.beast-stage .specimen-art::before,
+.beast-stage .specimen-art::after { display: none; }
+.beast-stage .specimen-image,
+.beast-stage .specimen-image:hover {
+  transform: none;
+  filter: none;
+  transition: none;
+}
+.hero .halo { display: none !important; }
+
 /* 应龙 SVG 内部描绘 */
 .dragon-wing {
   fill: url(#wing);
@@ -1972,4 +2024,3 @@ a.canon-card:focus-visible { box-shadow: 0 0 0 2px rgba(237, 189, 121, .5); }
   font-size: 12px;
   letter-spacing: .04em;
 }
-

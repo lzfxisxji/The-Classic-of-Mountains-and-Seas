@@ -17,9 +17,13 @@ const recordFields = ['no', 'name', 'latin', 'source', 'region', 'rank', 'elemen
 const statFields = ['strength', 'speed', 'wisdom', 'ability', 'danger'];
 let current = 'yinglong';
 
-Object.values(beasts).forEach(({ image: source }) => {
+Object.values(beasts).forEach(({ image: source, heroImage }) => {
   const preload = new Image();
   preload.src = source;
+  if (heroImage) {
+    const heroPreload = new Image();
+    heroPreload.src = heroImage;
+  }
 });
 
 function updateFieldValues(beast) {
@@ -31,7 +35,7 @@ function changeSpecimenImage(beast) {
   image.classList.add('is-leaving');
   setInteractive(beast);
   window.setTimeout(() => {
-    image.src = beast.image;
+    image.src = beast.heroImage ?? beast.image;
     image.alt = `${beast.name}原创异兽档案图`;
     const reveal = () => image.classList.remove('is-leaving');
     if (typeof image.decode === 'function') image.decode().catch(() => {}).finally(reveal);
@@ -43,12 +47,9 @@ function changeSpecimenImage(beast) {
 function setInteractive(beast) {
   const art = document.querySelector('.specimen-art');
   if (!art || !specimenSvg) return;
-  if (beast.interactive) {
-    art.classList.add('is-interactive');
-  } else {
-    art.classList.remove('is-interactive');
-    specimenSvg.querySelectorAll('.part.is-active').forEach((p) => p.classList.remove('is-active'));
-  }
+  // Hero 现在使用透明 PNG；SVG 线稿仅保留为历史兼容层，不再覆盖真实异兽图。
+  art.classList.remove('is-interactive');
+  specimenSvg.querySelectorAll('.part.is-active').forEach((p) => p.classList.remove('is-active'));
 }
 
 function initSpecimenInteraction() {
