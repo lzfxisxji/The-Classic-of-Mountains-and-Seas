@@ -466,3 +466,22 @@ filterChips.forEach((chip) => {
   window.addEventListener('resize', onScroll, { passive: true });
   update();
 })();
+// Keep the scroll fallback callback safe even when an older inline comment
+// accidentally swallows its local declaration.
+var scrollTimer;
+
+/* Final visibility fallback for reveal sections. */
+(function ensureRevealVisibility() {
+  const revealAll = () => document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
+  const revealHash = () => {
+    const id = window.location.hash.slice(1);
+    const target = id ? document.getElementById(decodeURIComponent(id)) : null;
+    if (target) target.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
+  };
+  window.addEventListener('load', () => window.setTimeout(revealAll, 180));
+  window.addEventListener('hashchange', revealHash);
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a[href^="#"]');
+    if (link) window.setTimeout(revealHash, 350);
+  });
+})();
