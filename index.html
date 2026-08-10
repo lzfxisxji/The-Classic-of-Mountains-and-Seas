@@ -61,10 +61,8 @@
           <div class="axis axis-x"></div><div class="axis axis-y"></div><span class="stage-label label-top">SOUTHERN RANGE / 07</span><span class="stage-label label-bottom">OBSERVATION IN PROGRESS</span>
           <figure class="specimen-art">
             <span class="specimen-aura" aria-hidden="true"></span>
-            <video id="specimen-image" class="specimen-video" autoplay muted loop playsinline preload="auto" poster="assets/dragon.png" aria-label="赤羽应龙原创异兽档案图">
-              <source src="assets/dragon.webm" type="video/webm" />
-            </video>
-            <img id="specimen-fallback" class="specimen-fallback" src="assets/dragon.png" alt="赤羽应龙原创异兽档案图" decoding="async" fetchpriority="high" />
+            <img id="specimen-image" class="specimen-image" src="assets/dragon.png" alt="赤羽应龙原创异兽档案图" decoding="async" fetchpriority="high" />
+            <!-- 动态视频版（方案B已验证可用）：assets/dragon.webm 暂弃用；恢复时改回 <video id="specimen-image"> + <img id="specimen-fallback"> 双轨，并在 data.js 启用 yinglong.webm 字段 -->
             <span class="art-reflection" aria-hidden="true"></span>
             <div class="ember-field" aria-hidden="true"></div>
           </figure>
