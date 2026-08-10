@@ -1,0 +1,13 @@
+svg open: 9 | svg close: 9
+part-tail: MISSING
+part-body: MISSING
+part-wing-left: MISSING
+part-wing-right: MISSING
+part-head: MISSING
+part-claw: MISSING
+CSS has is-interactive: true
+CSS has wing-flap-left: true
+JS has setInteractive: true
+JS has initSpecimenInteraction: true
+JS has specimenSvg: true
+data.js yinglong interactive: true

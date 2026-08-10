@@ -62,6 +62,66 @@
           <figure class="specimen-art">
             <span class="specimen-aura" aria-hidden="true"></span>
             <img id="specimen-image" class="specimen-image" src="assets/dragon.png" alt="赤羽应龙原创异兽档案图" decoding="async" fetchpriority="high" />
+            <!-- 分层交互应龙（鼠标热区驱动局部动画）；仅应龙启用，其余异兽显示上方静态 PNG -->
+            <svg id="specimen-svg" class="specimen-svg" viewBox="0 0 1136 1385" preserveAspectRatio="xMidYMid slice" aria-hidden="true" role="presentation">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f5e8cf"/><stop offset=".5" stop-color="#edbd79"/><stop offset="1" stop-color="#b9823c"/>
+                </linearGradient>
+                <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f5e8cf"/><stop offset=".55" stop-color="#edbd79"/><stop offset="1" stop-color="#7a4e22"/>
+                </linearGradient>
+                <radialGradient id="bodyGrad" cx=".5" cy=".4" r=".75">
+                  <stop offset="0" stop-color="#3a2418"/><stop offset="1" stop-color="#160d09"/>
+                </radialGradient>
+              </defs>
+              <!-- 尾 -->
+              <g class="part part-tail" data-part="tail">
+                <path class="art" d="M598 1080 C 660 1180, 520 1240, 600 1300 C 690 1356, 800 1300, 760 1240 C 726 1194, 640 1230, 668 1160" fill="none" stroke="url(#goldGrad)" stroke-width="16" stroke-linecap="round"/>
+                <rect class="hot" x="500" y="1060" width="320" height="300"/>
+              </g>
+              <!-- 身体 -->
+              <g class="part part-body" data-part="body">
+                <path class="art" d="M566 372 C 520 520, 648 560, 600 720 C 558 868, 660 950, 598 1090" fill="none" stroke="url(#goldGrad)" stroke-width="48" stroke-linecap="round"/>
+                <path class="art-fill" d="M566 372 C 520 520, 648 560, 600 720 C 558 868, 660 950, 598 1090" fill="none" stroke="url(#bodyGrad)" stroke-width="32" stroke-linecap="round"/>
+                <rect class="hot" x="498" y="350" width="170" height="770"/>
+              </g>
+              <!-- 左翼 -->
+              <g class="part part-wing part-wing-left" data-part="wing-left">
+                <path class="art" d="M540 440 C 360 372, 196 372, 116 308 C 214 424, 236 466, 156 524 C 256 506, 298 546, 238 606 C 338 564, 380 606, 342 664 C 440 602, 502 604, 542 566 Z" fill="url(#wingGrad)" stroke="#f5e8cf" stroke-width="3" opacity=".94"/>
+                <g class="feathers" stroke="#edbd79" stroke-width="2.4" opacity=".55" fill="none">
+                  <path d="M312 478 L 196 412"/><path d="M334 528 L 214 486"/><path d="M352 578 L 244 544"/><path d="M366 628 L 268 600"/>
+                </g>
+                <rect class="hot" x="96" y="288" width="470" height="404"/>
+              </g>
+              <!-- 右翼 -->
+              <g class="part part-wing part-wing-right" data-part="wing-right">
+                <path class="art" d="M622 440 C 802 372, 966 372, 1024 308 C 926 424, 904 466, 984 524 C 884 506, 842 546, 902 606 C 802 564, 760 606, 798 664 C 700 602, 638 604, 598 566 Z" fill="url(#wingGrad)" stroke="#f5e8cf" stroke-width="3" opacity=".94"/>
+                <g class="feathers" stroke="#edbd79" stroke-width="2.4" opacity=".55" fill="none">
+                  <path d="M824 478 L 940 412"/><path d="M802 528 L 922 486"/><path d="M784 578 L 892 544"/><path d="M770 628 L 868 600"/>
+                </g>
+                <rect class="hot" x="566" y="288" width="470" height="404"/>
+              </g>
+              <!-- 头 -->
+              <g class="part part-head" data-part="head">
+                <path class="art" d="M566 372 C 544 312, 566 258, 626 248 C 706 236, 748 288, 726 338 C 706 380, 642 388, 602 380 C 582 376, 570 374, 566 372 Z" fill="url(#bodyGrad)" stroke="url(#goldGrad)" stroke-width="11"/>
+                <path class="art" d="M624 258 C 612 206, 644 176, 686 156" fill="none" stroke="url(#goldGrad)" stroke-width="9" stroke-linecap="round"/>
+                <path class="art" d="M704 258 C 706 206, 746 180, 786 166" fill="none" stroke="url(#goldGrad)" stroke-width="9" stroke-linecap="round"/>
+                <path class="art" d="M566 372 C 484 392, 444 432, 424 484" fill="none" stroke="#edbd79" stroke-width="4" stroke-linecap="round"/>
+                <circle class="eye" cx="648" cy="308" r="9" fill="#b92620"/>
+                <rect class="hot" x="540" y="146" width="284" height="258"/>
+              </g>
+              <!-- 前左爪 -->
+              <g class="part part-claw" data-part="claw-fl">
+                <path class="art" d="M540 632 c -42 18, -62 50, -52 82 m 52 -82 c -8 42, 14 72, 44 82 m -44 -82 c 22 30, 52 40, 74 28" fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linecap="round"/>
+                <rect class="hot" x="462" y="610" width="156" height="140"/>
+              </g>
+              <!-- 前右爪 -->
+              <g class="part part-claw" data-part="claw-fr">
+                <path class="art" d="M654 632 c 42 18, 62 50, 52 82 m -52 -82 c 8 42, -14 72, -44 82 m 44 -82 c -22 30, -52 40, -74 28" fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linecap="round"/>
+                <rect class="hot" x="520" y="610" width="156" height="140"/>
+              </g>
+            </svg>
             <!-- 动态视频版（方案B已验证可用）：assets/dragon.webm 暂弃用；恢复时改回 <video id="specimen-image"> + <img id="specimen-fallback"> 双轨，并在 data.js 启用 yinglong.webm 字段 -->
             <span class="art-reflection" aria-hidden="true"></span>
             <div class="ember-field" aria-hidden="true"></div>

@@ -4,6 +4,7 @@ import { pageTurn, toggleAmbient } from './audio.js';
 const archive = document.getElementById('archive');
 const stage = document.querySelector('.beast-stage');
 const image = document.getElementById('specimen-image');
+const specimenSvg = document.getElementById('specimen-svg');
 const cards = [...document.querySelectorAll('.record-card')];
 const regions = [...document.querySelectorAll('.map-region')];
 const mapBoard = document.querySelector('.map-board');
@@ -28,6 +29,7 @@ function updateFieldValues(beast) {
 
 function changeSpecimenImage(beast) {
   image.classList.add('is-leaving');
+  setInteractive(beast);
   window.setTimeout(() => {
     image.src = beast.image;
     image.alt = `${beast.name}原创异兽档案图`;
@@ -35,6 +37,31 @@ function changeSpecimenImage(beast) {
     if (typeof image.decode === 'function') image.decode().catch(() => {}).finally(reveal);
     else reveal();
   }, 180);
+}
+
+/* 分层交互应龙：鼠标热区驱动局部动画（仅应龙 interactive:true） */
+function setInteractive(beast) {
+  const art = document.querySelector('.specimen-art');
+  if (!art || !specimenSvg) return;
+  if (beast.interactive) {
+    art.classList.add('is-interactive');
+  } else {
+    art.classList.remove('is-interactive');
+    specimenSvg.querySelectorAll('.part.is-active').forEach((p) => p.classList.remove('is-active'));
+  }
+}
+
+function initSpecimenInteraction() {
+  if (!specimenSvg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  specimenSvg.querySelectorAll('.part').forEach((part) => {
+    part.addEventListener('mouseenter', () => part.classList.add('is-active'));
+    part.addEventListener('mouseleave', () => part.classList.remove('is-active'));
+    part.addEventListener('click', () => {
+      part.classList.add('is-active');
+      window.setTimeout(() => part.classList.remove('is-active'), 1400);
+    });
+  });
 }
 
 function syncMapState(id) {
@@ -158,6 +185,8 @@ document.getElementById('open-record').addEventListener('click', () => openRecor
 document.getElementById('close-record').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 window.addEventListener('load', () => archive.classList.add('ready'));
+setInteractive(beasts[current]);
+initSpecimenInteraction();
 
 /* ---------- 移动端导航面板 ---------- */
 const menuButton = document.querySelector('.menu');

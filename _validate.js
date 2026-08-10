@@ -1,0 +1,17 @@
+const fs = require('fs');
+const base = 'E:/Mountain and Sea/';
+const out = [];
+const h = fs.readFileSync(base + 'index.html', 'utf8');
+out.push('svg open: ' + (h.match(/<svg/g) || []).length + ' | svg close: ' + (h.match(/<\/svg>/g) || []).length);
+const parts = ['part-tail','part-body','part-wing-left','part-wing-right','part-head','part-claw'];
+for (const p of parts) out.push(p + ': ' + (h.includes('"' + p + '"') || h.includes(' ' + p + ' ') ? 'present' : 'MISSING'));
+const css = fs.readFileSync(base + 'css/sections.css', 'utf8');
+out.push('CSS has is-interactive: ' + css.includes('is-interactive'));
+out.push('CSS has wing-flap-left: ' + css.includes('wing-flap-left'));
+const js = fs.readFileSync(base + 'js/app.js', 'utf8');
+out.push('JS has setInteractive: ' + js.includes('setInteractive'));
+out.push('JS has initSpecimenInteraction: ' + js.includes('initSpecimenInteraction'));
+out.push('JS has specimenSvg: ' + js.includes('specimenSvg'));
+const data = fs.readFileSync(base + 'js/data.js', 'utf8');
+out.push('data.js yinglong interactive: ' + /yinglong:[\s\S]*?interactive: true/.test(data));
+fs.writeFileSync(base + '_validate_out.txt', out.join('\n'));
