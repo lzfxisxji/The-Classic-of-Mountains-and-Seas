@@ -118,8 +118,9 @@
   left: 16px;
   color: #d8c3ae;
 }
-/* 卡片右下角原创线描插画（鎏金水印） */
+/* 卡片右下角原创线描插画（鎏金水印）—— 已隐藏 */
 .card-art {
+  display: none;
   position: absolute;
   right: 10px;
   bottom: 2px;

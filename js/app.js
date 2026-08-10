@@ -27,23 +27,37 @@ function updateFieldValues(beast) {
 }
 
 function changeSpecimenImage(beast) {
+  const fallback = document.getElementById('specimen-fallback');
   image.classList.add('is-leaving');
+  if (fallback) fallback.classList.add('is-leaving');
   window.setTimeout(() => {
     image.poster = beast.image;
     image.setAttribute('aria-label', `${beast.name}原创异兽档案图`);
+    if (fallback) {
+      fallback.src = beast.image;
+      fallback.alt = `${beast.name}原创异兽档案图`;
+    }
     if (beast.webm) {
+      image.classList.remove('is-hidden');
+      if (fallback) fallback.classList.remove('is-visible');
       if (image.dataset.src !== beast.webm) {
         image.src = beast.webm;
         image.dataset.src = beast.webm;
       }
       const p = image.play && image.play();
       if (p && p.catch) p.catch(() => {});
-    } else if (image.dataset.src) {
+    } else {
+      image.classList.add('is-hidden');
+      if (fallback) fallback.classList.add('is-visible');
+      image.pause();
       image.removeAttribute('src');
-      if (image.load) image.load();
       delete image.dataset.src;
+      if (image.load) image.load();
     }
-    window.setTimeout(() => image.classList.remove('is-leaving'), 60);
+    window.setTimeout(() => {
+      image.classList.remove('is-leaving');
+      if (fallback) fallback.classList.remove('is-leaving');
+    }, 60);
   }, 180);
 }
 
