@@ -16,11 +16,6 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* 异兽呼吸（悬停时轻微上下浮动） */
-@keyframes beast-breathe {
-  50% { transform: translateY(-8px) scale(1.012); }
-}
-
 /* 异兽眼睛发光 */
 @keyframes eye-glow {
   50% { filter: drop-shadow(0 0 8px #fff2bc); opacity: .65; }

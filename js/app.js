@@ -245,23 +245,58 @@ filterChips.forEach((chip) => {
   });
 });
 
-/* ---------- 滚动揭示：板块进入视口时淡入上移 ---------- */
+/* ---------- 滚动揭示：板块进入视口时淡入上移（多保险，杜绝锚点跳转/平滑滚动后残留隐藏） ---------- */
 (function initReveal() {
   const items = [...document.querySelectorAll('[data-reveal]')];
   if (!items.length) return;
+
+  const revealEl = (el) => { if (el && !el.classList.contains('is-revealed')) el.classList.add('is-revealed'); };
+  const revealWithin = (root) => (root || document).querySelectorAll('[data-reveal]').forEach(revealEl);
+  const revealInView = () => items.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight * 0.92 && r.bottom > 0) revealEl(el);
+  });
+
+  const revealHashTarget = () => {
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash) return;
+    const target = document.getElementById(decodeURIComponent(rawHash));
+    if (!target) return;
+    revealWithin(target);
+  };
+
+  // 无 IntersectionObserver 时直接全部显影
   if (!('IntersectionObserver' in window)) {
-    items.forEach((el) => el.classList.add('is-revealed'));
+    items.forEach(revealEl);
     return;
   }
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
+        revealEl(entry.target);
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   items.forEach((el) => io.observe(el));
+
+  // 兜底一：首屏/刷新后，立即显影已在视口内的元素
+  revealInView();
+  // 兜底二：锚点跳转（点击导航 / hashchange）后立即显影目标区块
+  revealHashTarget();
+  window.addEventListener('hashchange', revealHashTarget);
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', () => window.setTimeout(() => { revealHashTarget(); revealInView(); }, 350));
+  });
+  // 兜底三：滚动结束后再次显影视口内元素，防 IntersectionObserver 漏触发
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(revealInView, 140);
+  }, { passive: true });
+  // 兜底四：资源（图片/字体）加载完再确认一次，布局变化可能改变进入视口的判定
+  window.addEventListener('load', () => { revealInView(); revealHashTarget(); });
 })();
 
 /* ---------- 山经体系：点击经部卡片联动档案索引筛选 ---------- */

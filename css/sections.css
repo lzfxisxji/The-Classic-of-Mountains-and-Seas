@@ -277,11 +277,12 @@ nav .active {
   width: min(59vw, 735px);
   height: auto;
   filter: drop-shadow(0 34px 24px rgba(0, 0, 0, .47));
-  animation: beast-enter 1.35s .18s cubic-bezier(.22, .8, .2, 1) both,
-             beast-breathe 5.5s 1.65s ease-in-out infinite;
+  animation: beast-enter 1.35s .18s cubic-bezier(.22, .8, .2, 1) both;
   transform-origin: 55% 66%;
-  transition: filter .5s;
+  transition: filter .5s, transform .6s cubic-bezier(.2, .8, .2, 1);
 }
+/* 取消常态呼吸：仅在鼠标悬停时对整图做轻微放大（光标移动才变大） */
+.beast:hover { transform: scale(1.03); }
 
 /* 高分辨率异兽档案图：保留旧 SVG 规则兼容性，并以展柜式画框承载图像 */
 .specimen-art {
@@ -323,10 +324,11 @@ nav .active {
   z-index: 1;
 }
 .specimen-art img {
-  transform: scale(1.018);
-  transition: opacity .36s ease, transform 1s cubic-bezier(.2,.8,.2,1), filter .7s ease;
-  animation: img-float 9s ease-in-out infinite;
+  transform: scale(1);
+  transition: opacity .36s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .7s ease;
 }
+/* 取消常态呼吸/漂浮：仅在鼠标悬停时对静态档案图做轻微放大（光标移动才变大） */
+.specimen-art:not(.is-interactive) img:hover { transform: scale(1.04); }
 .specimen-art video.is-leaving { opacity: 0; filter: blur(7px) brightness(.65); }
 .specimen-art img.is-leaving { opacity: 0; transform: scale(1.07); filter: blur(7px) brightness(.65); }
 .specimen-art .specimen-fallback {
@@ -334,9 +336,8 @@ nav .active {
   display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;
   opacity: 0; pointer-events: none;
   filter: contrast(1.06) saturate(1.04) brightness(.93);
-  transform: scale(1.018);
-  transition: opacity .36s ease, transform 1s cubic-bezier(.2,.8,.2,1), filter .7s ease;
-  animation: img-float 9s ease-in-out infinite;
+  transform: scale(1);
+  transition: opacity .36s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .7s ease;
 }
 .specimen-art .specimen-fallback.is-visible { opacity: 1; }
 .specimen-video.is-hidden { opacity: 0; }
@@ -375,9 +376,7 @@ nav .active {
 .specimen-svg .part-wing-right .feathers { transform-origin: 0% 50%; }
 .specimen-svg .part-claw .art { transform-origin: 50% 0%; }
 
-/* 常态：身体呼吸 + 尾轻摆，保持“活着”的观感 */
-.specimen-art.is-interactive .part-body .art,
-.specimen-art.is-interactive .part-body .art-fill { animation: body-breathe 4.5s ease-in-out infinite; }
+/* 常态：仅尾轻摆保持"活着"的观感；身体呼吸缩放已移除，改为鼠标悬停时才触发 */
 .specimen-art.is-interactive .part-tail .art { animation: tail-sway 5.5s ease-in-out infinite; }
 
 /* 鼠标移到部位：专属动画 + 鎏金高亮 */
@@ -429,11 +428,7 @@ nav .active {
   .specimen-svg .part.is-active .art-fill { animation: none !important; filter: none !important; }
 }
 
-/* 标本动态（方案A）：龙图悬浮呼吸 + 旋转金光衬底 + 火星粒子 */
-@keyframes img-float {
-  0%, 100% { translate: 0 0; scale: 1; }
-  50% { translate: 0 -12px; scale: 1.02; }
-}
+/* 标本动态（方案A）：旋转金光衬底 + 火星粒子（呼吸/漂浮缩放已移除，仅悬停时放大） */
 .specimen-aura {
   position: absolute;
   z-index: 0;
