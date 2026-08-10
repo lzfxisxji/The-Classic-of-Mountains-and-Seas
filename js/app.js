@@ -281,22 +281,18 @@ filterChips.forEach((chip) => {
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   items.forEach((el) => io.observe(el));
 
-  // 兜底一：首屏/刷新后，立即显影已在视口内的元素
-  revealInView();
-  // 兜底二：锚点跳转（点击导航 / hashchange）后立即显影目标区块
+  // 锚点跳转（点击导航 / hashchange）后立即显影目标区块，避免空白
   revealHashTarget();
   window.addEventListener('hashchange', revealHashTarget);
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', () => window.setTimeout(() => { revealHashTarget(); revealInView(); }, 350));
+    link.addEventListener('click', () => window.setTimeout(revealHashTarget, 350));
   });
-  // 兜底三：滚动结束后再次显影视口内元素，防 IntersectionObserver 漏触发
+  // 滚动结束后，仅对确实已在视口内但仍未显影的元素做兜底，保持下滑渐进节奏
   let scrollTimer;
   window.addEventListener('scroll', () => {
     window.clearTimeout(scrollTimer);
     scrollTimer = window.setTimeout(revealInView, 140);
   }, { passive: true });
-  // 兜底四：资源（图片/字体）加载完再确认一次，布局变化可能改变进入视口的判定
-  window.addEventListener('load', () => { revealInView(); revealHashTarget(); });
 })();
 
 /* ---------- 山经体系：点击经部卡片联动档案索引筛选 ---------- */
